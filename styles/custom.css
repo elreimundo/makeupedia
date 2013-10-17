@@ -1,11 +1,36 @@
 body {
   margin:1em;
+  /*background-image:url("http://frontpagemag.com/wp-content/uploads/2010/07/aWikipedia-logo_inverse.gif");*/
+  background-image:url("http://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Wikipedia-logo-v2.svg/1000px-Wikipedia-logo-v2.svg.png");
+  background-size: cover;
 }
 
 div {
-  margin:5px;
+  margin:.5em;
 }
 
-input {
-  margin:5px;
+form {
+  margin:.5em;
+}
+
+.submit-button {
+  margin-top:0.75em;
+}
+
+.space-y {
+  margin-top:.5em;
+}
+
+.transparent-div {
+  background-color:rgba(0,0,0,0.4);
+  border-radius:5px;
+}
+
+.textbox-wide {
+  width:200px;
+}
+
+.textbox-wide-tall {
+  width: 510px;
+  height: 35px;
 }

@@ -1,19 +1,26 @@
 <head>
   <link rel="stylesheet" type="text/css" href="styles/pure-min.css">
   <link rel="stylesheet" type="text/css" href="styles/custom.css">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+  <script src="application.js"></script>
 </head>
 <body>
 
 <div class="container">
-  <form class="pure-form">
-    <fieldset>
-      <input type="text" placeholder="Enter url">
+  <div class="transparent-div">
+    <form class="pure-form">
+      <fieldset>
+        <input class="textbox-wide-tall space-y" type="text" placeholder="Enter url"><br>
+        <input class="textbox-wide" type="text" placeholder="Enter search term">
+        <input class="textbox-wide" type="text" placeholder="Enter replace term">
 
-      <input type="submit" value="Submit" class="pure-button pure-button-primary">
-    </fieldset>
-  </form>
 
-  <div class="wikipage">Wiki page goes here</div>
+        <input type="submit" value="Submit" class="submit-button pure-button pure-button-primary">
+      </fieldset>
+    </form>
+  </div>
+
+  <div class="wikipage"></div>
 
 </container>
 </body>
