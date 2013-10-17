@@ -1,5 +1,6 @@
 body {
   margin:1em;
+  /*background-image:url("http://frontpagemag.com/wp-content/uploads/2010/07/aWikipedia-logo_inverse.gif");*/
   background-image:url("http://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Wikipedia-logo-v2.svg/1000px-Wikipedia-logo-v2.svg.png");
   background-size: cover;
 }
