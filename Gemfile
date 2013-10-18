@@ -12,6 +12,14 @@ group :production do
 	gem 'pg'
 end
 
+group :development, :test do
+  gem 'jasmine'
+  gem 'faker'
+  gem 'capybara'
+  gem 'jasmine'
+  gem 'shoulda-matchers'
+  gem 'capybara'
+end
 
 # Gems used only for assets and not required
 # in production environments by default.
