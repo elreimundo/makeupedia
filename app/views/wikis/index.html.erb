@@ -1,0 +1,17 @@
+<body>
+<div class="container">
+  <div class="transparent-div">
+
+  <%= form_tag("/wikis/new", :method => "get", :class => "pure-form", :remote => true) do %>
+    <%= text_field_tag "url", nil, :class => "textbox-wide-tall space-y", placeholder: "Enter url" %><br>
+    <%= text_field_tag "search", nil, :class => "textbox-wide", placeholder: "Enter search term" %>
+    <%= text_field_tag "replace", nil, :class => "textbox-wide", placeholder: "Enter replace term" %>
+    <%= submit_tag "Submit", :class => "submit-button pure-button pure-button-primary" %>
+  <% end %>
+
+  </div>
+
+  <div class="wikipage"></div>
+
+</container>
+</body>
