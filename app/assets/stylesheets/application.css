@@ -1,0 +1,50 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require_tree .
+ *= require pure-min
+ */
+
+body {
+  /*background-image:url("http://frontpagemag.com/wp-content/uploads/2010/07/aWikipedia-logo_inverse.gif");*/
+  background-image:url("http://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Wikipedia-logo-v2.svg/1000px-Wikipedia-logo-v2.svg.png");
+  background-size: cover;
+}
+
+div {
+  margin:.5em;
+}
+
+form {
+  padding:1em;
+}
+
+.submit-button {
+  margin-top:0.75em;
+}
+
+.space-y {
+  margin-top:.5em;
+}
+
+.transparent-div {
+  background-color:rgba(0,0,0,0.4);
+  border-radius:5px;
+}
+
+.textbox-wide {
+  width:200px;
+}
+
+.textbox-wide-tall {
+  width: 510px;
+  height: 35px;
+}
