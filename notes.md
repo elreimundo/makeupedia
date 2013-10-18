@@ -51,6 +51,11 @@ html
     render json: content
   end
   ```
+  
+  one route:
+  ```ruby
+    get "wiki/:page", to: "wikis#wiki"
+    ```
 
 ### Thurs, Oct 17
 
