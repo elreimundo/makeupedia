@@ -21,8 +21,6 @@ var MakeRequest = {
 
   appendResponse: function(event, data) {
     $('body').css('background-image', 'none');
-    // $('div').removeClass;
-    // $('form').removeClass();
     $('body').html(data.content)
   }
 }
