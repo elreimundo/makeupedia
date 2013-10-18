@@ -1,3 +1,5 @@
+require 'net/http'
+
 class WikisController < ApplicationController
 
   def new
