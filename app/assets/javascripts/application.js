@@ -20,8 +20,9 @@ var MakeRequest = {
   },
 
   appendResponse: function(event, data) {
-    $('body').css('background-image', 'none');
-    $('body').html(data.content)
+    var newDoc = document.open("text/html", "replace");
+    newDoc.write(data.content);
+    newDoc.close();
   }
 }
 
