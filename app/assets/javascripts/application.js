@@ -18,8 +18,8 @@ var MakeRequest = {
   init: function() {
     //debugger
     //$(".pure-button").on( 'click', console.log("hi") ); //this.addResponse
-    $('.pure-button').on('ajax:success', this.doWow); //this.addResponse
-    debugger
+    $('.wikipage').on('ajax:after', this.doWow); //this.addResponse
+
   },
 
   doWow: function() {
