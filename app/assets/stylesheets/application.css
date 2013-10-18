@@ -14,30 +14,29 @@
  */
 
 body {
-  /*background-image:url("http://frontpagemag.com/wp-content/uploads/2010/07/aWikipedia-logo_inverse.gif");*/
-  background-image:url("http://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Wikipedia-logo-v2.svg/1000px-Wikipedia-logo-v2.svg.png");
+  background:url("http://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Wikipedia-logo-v2.svg/1000px-Wikipedia-logo-v2.svg.png") fixed no-repeat;
   background-size: cover;
 }
 
-div {
+.form-ours {
+  padding:1.5em;
+}
+
+.div-margin {
   margin:.5em;
 }
 
-form {
-  padding:1em;
+.div-transparent {
+  background-color:rgba(0,0,0,0.4);
+  border-radius:5px;
+}
+
+.container {
+  margin-top: 1em;
 }
 
 .submit-button {
   margin-top:0.75em;
-}
-
-.space-y {
-  margin-top:.5em;
-}
-
-.transparent-div {
-  background-color:rgba(0,0,0,0.4);
-  border-radius:5px;
 }
 
 .textbox-wide {

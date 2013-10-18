@@ -16,19 +16,13 @@
 
 var MakeRequest = {
   init: function() {
-    //debugger
-    // $(".pure-button").on( 'click', function(e){
-    // e.preventDefault()
-    // console.log("hi")
-    // } ); //this.addResponse
-    $('.submit-button').on('ajax:success', this.doWow); //this.addResponse
+    $('.pure-form').on('ajax:success', this.appendResponse)
   },
 
-  doWow: function() {
-    alert('did it')
-    // $(body).html(data.contents)
+  appendResponse: function(event, data) {
+    $('body').css('background-image', 'none');
+    $('body').html(data.content)
   }
-
 }
 
 $(function() {
