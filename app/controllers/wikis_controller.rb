@@ -6,7 +6,12 @@ class WikisController < ApplicationController
     uri = URI.parse(params[:url])
     search_text = Regexp.new(params[:search], Regexp::IGNORECASE)
     replace_text = params[:replace]
-    #uri = URI.parse("http://en.wikipedia.org/wiki/Internet")
+
+    ## hard-code
+    uri = URI.parse("http://en.wikipedia.org/wiki/Internet")
+    search_text = Regexp.new("the",Regexp::IGNORECASE)
+    replace_text = "and"
+
 
     content = Net::HTTP.get_response(uri).body
     content.force_encoding("UTF-8")
