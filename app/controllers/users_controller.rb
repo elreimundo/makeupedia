@@ -4,11 +4,12 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(email: params[:email], password: params[:password])
+    @user = User.new(params[:user])
     if @user.save
-      puts "Yes! Victory!"
+      session[:user_id] = @user.id
+      redirect_to root_path
     else
-      puts "Oh, noes!!!"
+      render :new
     end
   end
 end
