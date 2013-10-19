@@ -1,5 +1,8 @@
 require 'spec_helper'
 
 describe PageUser do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it { should have_many(:changes)}
+  it { should belong_to(:user)}
+  it { should belong_to(:page)}
+
 end

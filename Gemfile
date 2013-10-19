@@ -17,7 +17,6 @@ group :development, :test do
   gem 'faker'
   gem 'capybara'
   gem 'shoulda-matchers'
-  gem 'capybara'
   gem 'rspec-rails'
   gem 'database_cleaner'
   gem 'factory_girl_rails'
