@@ -15,7 +15,7 @@ module WikisHelper
   end
 
   def break_the_object(node)
-      return node.content = node.content.to_s.gsub(@data[:search_text],@data[:replace_text]) if node.children.empty? && node.text?
-      node.children.each{|e| break_the_object(e)} unless node.children.empty?
+     return node.content = node.content.to_s.gsub(@data[:search_text],@data[:replace_text]) if node.children.empty? && node.text?
+     node.children.each{|e| break_the_object(e)} unless node.children.empty?
   end
 end
