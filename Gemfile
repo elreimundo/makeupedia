@@ -20,6 +20,8 @@ group :development, :test do
   gem 'jasmine'
   gem 'shoulda-matchers'
   gem 'capybara'
+  gem 'rspec-rails'
+  gem 'database_cleaner'
 end
 
 # Gems used only for assets and not required
