@@ -163,6 +163,7 @@ DEPENDENCIES
   faker
   jasmine
   jquery-rails
+  nokogiri
   pg
   rails (= 3.2.14)
   rspec-rails

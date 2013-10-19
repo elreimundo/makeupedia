@@ -12,13 +12,13 @@ fairly raw:
 document
 html
     head
-        json/ajax - get origional
-        json/ajax - get changes
-        js - build  page from origional, body = $(origional);
-        js - modify it with changes
-        js - someone/somewhere make it accessable for the user to add/delete chages
-        wikipedia's head files
-        js - would load our changes via current_user.chages.on.this.page
+        * json/ajax - get origional
+        * json/ajax - get changes
+        * js - build  page from origional, body = $(origional);
+        * js - modify it with changes
+        * js - someone/somewhere make it accessable for the user to add/delete chages
+        * wikipedia's head files
+        * js - would load our changes via current_user.chages.on.this.page
            - then it would
         css
     /head
