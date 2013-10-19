@@ -1,12 +1,19 @@
+<div class="error_messages">
+  <%= @user.errors.full_messages.join(', ') %>
+</div>
 <%= form_for @user do |t| %>
-  <%= t.label :email %>:
-  <%= t.text_field :email %><br>
-
-  <%= t.label :password %>:
-  <%= t.password_field :password %><br>
-
-  <%= t.label :password_confirmation %>:
-  <%= t.password_field :password_confirmation %><br>
+<div id="email">
+  <%= t.label :email, "Email:" %>
+  <%= t.text_field :email %>
+</div>
+<div id="password">
+  <%= t.label :password, "Password:" %>
+  <%= t.password_field :password %>
+</div>
+<div id="confirm_password">
+  <%= t.label :password_confirmation, "Confirm Password:" %>
+  <%= t.password_field :password_confirmation %>
+</div>
 
   <%= t.submit %>
 <% end %>
