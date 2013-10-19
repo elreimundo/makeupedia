@@ -6,6 +6,11 @@ FactoryGirl.define do
     url { Faker::Internet.url }
   end
 
+  factory :change do
+    find_text { Faker::Lorem.words(2)}
+    replace_text { Faker::Lorem.words(2)}
+  end
+
   factory :user do
     email { Faker::Internet.email }
 
