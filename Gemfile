@@ -17,9 +17,10 @@ group :development, :test do
   gem 'jasmine'
   gem 'faker'
   gem 'capybara'
-  gem 'jasmine'
   gem 'shoulda-matchers'
-  gem 'capybara'
+  gem 'rspec-rails'
+  gem 'database_cleaner'
+  gem 'factory_girl_rails'
 end
 
 # Gems used only for assets and not required

@@ -1,3 +1,5 @@
+require 'net/http'
+
 module WikisHelper
   def build_the_json(params)
     @data = {uri: (params[:url].empty? ? URI.parse("http://en.wikipedia.org/wiki/Internet") : URI.parse(params[:url])),
