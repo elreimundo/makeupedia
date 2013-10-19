@@ -4,10 +4,6 @@ describe WikisController do
   #let! (:page) { FactoryGirl.create(:page) } ## Fails because not a real url
   #let! (:change) { FactoryGirl.create(:change) } ## Fails because conflicts with change method, below
 
-  # before(:each) do
-  #   @page = { :url => "http://www.cnn.com" }
-  # end
-
   describe "POST #create" do
     it "should create a new page" do
       expect {
