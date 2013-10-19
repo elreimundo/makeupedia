@@ -1,6 +1,7 @@
 Mwiki::Application.routes.draw do
   root :to => "wikis#index"
   resources :wikis
+  resources :users
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
