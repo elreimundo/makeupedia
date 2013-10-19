@@ -1,1 +1,12 @@
-<%= form_for @user %>
+<%= form_for @user do |t| %>
+  <%= t.label :email %>:
+  <%= t.text_field :email %><br>
+
+  <%= t.label :password %>:
+  <%= t.text_field :password %><br>
+
+  <%= t.label :password_confirmation %>:
+  <%= t.text_field :password_confirmation %><br>
+
+  <%= t.submit %>
+<% end %>

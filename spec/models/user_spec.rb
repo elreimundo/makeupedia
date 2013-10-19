@@ -7,6 +7,6 @@ describe User do
   it { should validate_presence_of(:email) }
   it { should have_many(:pages)}
 
-  it { should validate_presence_of :password, :on => :create}
+  it { should validate_presence_of(:password), :on => :create}
 
 end
