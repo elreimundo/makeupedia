@@ -13,6 +13,8 @@ FactoryGirl.define do
 
   factory :user do
     email { Faker::Internet.email }
+    password "123zzz"
+    password_confirmation { "123zzz" }
 
     factory :users_with_pages do
       after(:create) do |user|
