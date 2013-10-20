@@ -4,9 +4,7 @@ describe "routing to makeupedia" do
     expect(:get => "/").to route_to(:controller => "wikis", :action => "index")
   end
 
-  it "routes /wikis/create to wikis#create" do
+  it "routes wikis create to wikis#create" do
     expect(:post => "/wikis").to route_to(:controller => "wikis", :action => "create")
   end
-
-
 end
