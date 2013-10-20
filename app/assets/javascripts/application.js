@@ -17,8 +17,17 @@
 var MakeRequest = {
   init: function() {
     $('.main-form').on('ajax:success', this.appendResponse);
-    $('.main-form').on('ajax:beforeSend', function() {$('#loading-indicator').show()});
-    $('.main-form').on('ajax:complete', function() {$('#loading-indicator').hide()});
+    $('.main-form').on('ajax:beforeSend', this.doBeforeSend);
+    $('.main-form').on('ajax:complete', this.onComplete);
+  },
+
+  doBeforeSend: function() {
+    $('.container').slideUp();
+    //$('#loading-indicator').show();
+  },
+
+  doOnComplete: function() {
+    //$('#loading-indicator').hide();
   },
 
   appendResponse: function(event, data) {
@@ -29,6 +38,6 @@ var MakeRequest = {
 }
 
 $(function() {
-    $('#loading-indicator').hide()
+    $('#loading-indicator').hide();
     MakeRequest.init();
   });

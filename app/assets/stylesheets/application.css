@@ -23,9 +23,17 @@ body {
   background-size: cover;
 }
 
+.container {
+  margin-right: 10%;
+  margin-left: 10%;
+  position: relative;
+}
+
 .main-form {
-  padding:1.5em;
-  margin-top:1.5em;
+  padding-top:2em;
+  padding-left:2em;
+  padding-right:2em;
+  padding-bottom:1.2em;
 }
 
 .div-margin {
@@ -34,7 +42,8 @@ body {
 
 .div-transparent {
   background-color:rgba(0,0,0,0.4);
-  border-radius:5px;
+  border-bottom-left-radius:5px;
+  border-bottom-right-radius:5px;
 }
 
 .submit-button {
@@ -46,14 +55,21 @@ body {
 }
 
 #loading-indicator {
-    background-color: #000;
-    opacity: 0.3;
-    position: absolute;
-    height: 100%;
-    width: 100%;
+  background-color: #000;
+  opacity: 0.3;
+  position: absolute;
+  height: 100%;
+  width: 100%;
 }
 
 .span-right {
   float: right;
-  margin-right:3.5em;
+}
+
+footer {
+  padding:.5em;
+}
+
+footer a {
+  text-decoration: none;
 }
