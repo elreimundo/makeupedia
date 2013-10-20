@@ -14,7 +14,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    if current_user
+    if current_user.id == params[:id].to_i
       @user = User.find(session[:user_id])
     else
       redirect_to :root
