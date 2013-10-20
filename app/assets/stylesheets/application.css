@@ -10,16 +10,22 @@
  *
  *= require_self
  *= require_tree .
- *= require pure-min
  */
+
+html, body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
 
 body {
   background:url("http://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Wikipedia-logo-v2.svg/1000px-Wikipedia-logo-v2.svg.png") fixed no-repeat;
   background-size: cover;
 }
 
-.form-ours {
+.main-form {
   padding:1.5em;
+  margin-top:1.5em;
 }
 
 .div-margin {
@@ -31,19 +37,18 @@ body {
   border-radius:5px;
 }
 
-.container {
-  margin-top: 1em;
-}
-
 .submit-button {
   margin-top:0.75em;
 }
 
-.textbox-wide {
-  width:200px;
+.top-margin {
+  margin-top:0.5em;
 }
 
-.textbox-wide-tall {
-  width: 510px;
-  height: 35px;
+#loading-indicator {
+    background-color: #000;
+    opacity: 0.3;
+    position: absolute;
+    height: 100%;
+    width: 100%;
 }
