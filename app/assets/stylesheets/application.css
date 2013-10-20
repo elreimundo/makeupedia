@@ -19,7 +19,7 @@ html, body {
 }
 
 body {
-  background:url("http://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Wikipedia-logo-v2.svg/1000px-Wikipedia-logo-v2.svg.png") fixed no-repeat;
+  background:url("/assets/makeupediabw.png") fixed no-repeat;
   background-size: cover;
 }
 
