@@ -41,6 +41,17 @@
     <div id="loading-indicator"></div>
 
     <div class="container">
+      <div>
+        <ul>
+          <% if current_user %>
+            <li><%= "Signed in as " + current_user.email %></li>
+            <li><%= link_to "Logout", logout_path %></li>
+          <% else %>
+            <li><%= link_to "Sign Up", signup_path %></li>
+            <li><%= link_to "Log In", login_path %></li>
+          <% end %>
+        </ul>
+      </div>
       <%= bootstrap_flash %>
       <%= yield %>
 

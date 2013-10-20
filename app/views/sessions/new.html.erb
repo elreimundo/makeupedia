@@ -1,0 +1,5 @@
+<%= form_tag('/sessions', :method => "post", :class => "pure-form form-ours") do %>
+  <%= text_field_tag "email", nil, :class => "textbox-wide-tall", placeholder: "Email" %>
+  <%= password_field_tag "password", nil, :class => "textbox-wide-tall", placeholder: "Password" %>
+  <%= submit_tag %>
+<% end %>
