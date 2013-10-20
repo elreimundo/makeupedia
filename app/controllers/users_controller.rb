@@ -12,4 +12,13 @@ class UsersController < ApplicationController
       render :new
     end
   end
+
+  def show
+    if current_user
+      @user = User.find(session[:user_id])
+    else
+      redirect_to :root
+    end
+
+  end
 end
