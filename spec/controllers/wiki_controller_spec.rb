@@ -1,20 +1,22 @@
 require 'spec_helper'
+#include AuthHelper
 
 describe WikisController do
   #let! (:page) { FactoryGirl.create(:page) } ## Fails because not a real url
   #let! (:change) { FactoryGirl.create(:change) } ## Fails because conflicts with change method, below
 
+
   describe "POST #create" do
-    it "should create a new page" do
+    it "should not create a new page for an anonymous user" do
       expect {
         post :create, :url => "http://www.cnn.com", :search => "hi", :replace => "bye"
-      }.to change { Page.count }.by 1
+      }.not_to change { Page.count }
     end
 
-    it "should create a new change" do
+    it "should not create a new change for an anonymous user" do
       expect {
         post :create, :url => "http://www.cnn.com", :search => "hi", :replace => "bye"
-      }.to change { Change.count }.by 1
+      }.not_to change { Change.count }
     end
   end
 
