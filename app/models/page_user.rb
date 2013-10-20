@@ -1,4 +1,5 @@
 class PageUser < ActiveRecord::Base
+	attr_accessible :user_id, :page_id
   belongs_to :user
   belongs_to :page
   has_many :changes
