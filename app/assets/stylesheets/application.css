@@ -52,3 +52,8 @@ body {
     height: 100%;
     width: 100%;
 }
+
+.span-right {
+  float: right;
+  margin-right:3.5em;
+}
