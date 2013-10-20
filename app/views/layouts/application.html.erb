@@ -41,22 +41,19 @@
     <div id="loading-indicator"></div>
 
     <div class="container">
-      <div>
-        <ul>
-          <% if current_user %>
-            <li><%= "Signed in as " + current_user.email %></li>
-            <li><%= link_to "Logout", logout_path %></li>
-          <% else %>
-            <li><%= link_to "Sign Up", signup_path %></li>
-            <li><%= link_to "Log In", login_path %></li>
-          <% end %>
-        </ul>
-      </div>
       <%= bootstrap_flash %>
       <%= yield %>
 
       <footer>
-        <p>&copy; Company 2013</p>
+        <span class="span-left">&copy; Makeupedia <%= Time.now.year %></span>
+        <span class="span-right">
+          <% if current_user %>
+            <%= "Signed in as " + current_user.email %>
+            <%= link_to "Logout", logout_path %>
+          <% else %>
+            <%= link_to "Sign Up", signup_path %> <strong>|</strong> <%= link_to "Log In", login_path %>
+          <% end %>
+        </span>
       </footer>
 
     </div> <!-- /container -->
