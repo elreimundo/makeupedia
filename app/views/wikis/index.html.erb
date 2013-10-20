@@ -1,10 +1,8 @@
-<div class="div-transparent form-group">
+<div class="div-transparent">
 
-<%= form_tag("/wikis", :method => "post", :class => "main-form", :role => "form", :remote => true) do %>
-  <%= text_field_tag "url", nil, :class => "form-control", placeholder: "Enter url" %><br>
-  <%= text_field_tag "search", nil, :class => "form-control", placeholder: "Enter search term" %>
-  <%= text_field_tag "replace", nil, :class => "form-control top-margin", placeholder: "Enter replace term" %>
-  <%= submit_tag "Submit", :class => "submit-button btn btn-primary", :disable_with => "Please wait..." %>
+<%= form_tag("/wikis", :method => "post", :class => "main-form", :remote => true) do %>
+  <%= text_field_tag "search_page", nil, :type => "search", :id => "search", placeholder: "Enter search term" %><br>
+  <%= submit_tag "Submit", 'data-role' => "button", 'data-inline'=> "true", 'data-theme' => "b", :disable_with => "Please wait..." %>
 <% end %>
 
 </div>

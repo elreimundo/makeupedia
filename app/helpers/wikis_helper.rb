@@ -1,11 +1,17 @@
 require 'net/http'
 
 module WikisHelper
-  def build_the_json(params)
-    @data = {uri: (params[:url].empty? ? URI.parse("http://en.wikipedia.org/wiki/Internet") : URI.parse(params[:url])),
-    search_text: (params[:search].empty? ? Regexp.new("internet", Regexp::IGNORECASE) : Regexp.new(params[:search], Regexp::IGNORECASE)),
-    replace_text: (params[:replace].empty? ? "Al Gore" : params[:replace])}
+  def build_the_search(params)
+    params[:search_page].gsub(" ","_")
+  end
 
+  def build_the_json(params)
+    title_uri = "http://en.wikipedia.org/" + build_the_search(params)
+    @data = {
+              uri: (params[:search_page].empty? ? URI.parse("http://en.wikipedia.org/wiki/Internet") : URI.parse(title_uri)),
+              search_text: (params[:search].nil? ? "" : Regexp.new(params[:search], Regexp::IGNORECASE)),
+              replace_text: (params[:replace].nil? ? "" : params[:replace])
+            }
     build_the_page
   end
 
