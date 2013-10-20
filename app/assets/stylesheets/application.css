@@ -33,7 +33,7 @@ body {
 }
 
 .div-transparent {
-  background-color:rgba(0,0,0,0.4);
+  background-color:rgba(155,155,155,0.4);
   border-radius:5px;
 }
 
@@ -56,4 +56,12 @@ body {
 .span-right {
   float: right;
   margin-right:3.5em;
+}
+
+footer {
+  background-color:rgba(155,155,155,0.4);
+  border-radius:5px;
+  color:white;
+  padding:10px;
+  padding-left:20px;
 }

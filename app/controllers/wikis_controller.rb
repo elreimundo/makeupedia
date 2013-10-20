@@ -3,6 +3,7 @@ class WikisController < ApplicationController
 
   def create
     if current_user
+      # page = find_or_create_by('url=?', params[:url])
       page = current_user.pages.where('url=?', params[:url])
       page.empty? ? page = current_user.pages.create(:url => params[:url]) : page = page.first
       page_user = PageUser.where('user_id=?',current_user.id).where('page_id=?',page.id).first
