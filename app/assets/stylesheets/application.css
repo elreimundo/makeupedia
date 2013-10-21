@@ -65,3 +65,44 @@ footer {
   padding:10px;
   padding-left:20px;
 }
+
+.delete{
+  float: right;
+  background: #e11507;
+  color:white;
+  text-decoration: none;
+  border-radius:5px;
+  padding: 5px;
+  padding-right: 7px;
+  padding-left: 7px;
+  border: 1px white solid;
+}
+
+h4 a.delete{
+  color:white;
+  text-decoration: none;
+  font-size: 8px;
+}
+
+a.delete{
+  text-decoration: none;
+  font-size: 8px;
+  padding: 5px;
+  padding-right: 7px;
+  padding-left: 7px;
+}
+
+.delete:hover{
+  background:white;
+  color:red;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.full-width{
+  width:100%;
+}
+
+.acc-changes{
+  margin-top:5px;
+}
