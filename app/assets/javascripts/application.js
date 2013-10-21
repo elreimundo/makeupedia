@@ -23,11 +23,9 @@ var MakeRequest = {
 
   doBeforeSend: function() {
     $('.container').slideUp();
-    //$('#loading-indicator').show();
   },
 
   doOnComplete: function() {
-    //$('#loading-indicator').hide();
   },
 
   appendResponse: function(event, data) {
@@ -38,6 +36,5 @@ var MakeRequest = {
 }
 
 $(function() {
-    $('#loading-indicator').hide();
     MakeRequest.init();
   });

@@ -2,13 +2,13 @@ require 'net/http'
 include StyleHelper
 module WikisHelper
   def build_the_search(params)
-    params[:search_page].gsub(" ","_").capitalize
+    params[:search_page].gsub(" ","_").capitalize if params[:search_page].include? " "
   end
 
   def build_the_json(params)
-    title_uri = "http://en.wikipedia.org/wiki/" + build_the_search(params)
+    title_uri = "http://en.wikipedia.org/wiki/elephant"
     @data = {
-              uri: (params[:search_page].empty? ? URI.parse("http://en.wikipedia.org/wiki/Internet") : URI.parse(title_uri)),
+              uri: URI.parse("http://en.wikipedia.org/wiki/Elephant"),
               ## TO DO: Trap below for empty? Or should this be an error?
               search_text: (params[:search].nil? ? "" : Regexp.new(params[:search], Regexp::IGNORECASE)),
               replace_text: (params[:replace].nil? ? "" : params[:replace])
@@ -68,13 +68,15 @@ module WikisHelper
     div_jq = Nokogiri::XML::Node.new "div", nokogiri_object
     textarea_select = Nokogiri::XML::Node.new "textarea", nokogiri_object
     textarea_select['type'] = "textarea"
-    textarea_select['id'] = "text-select"
+    textarea_select['id'] = "find_text"
+    textarea_select['name'] = "find_text"
     textarea_select['placeholder'] = "Select or type some text to replace"
     textarea_select['style'] = textarea_style
 
     textarea_replace = Nokogiri::XML::Node.new "textarea", nokogiri_object
     textarea_replace['type'] = "textarea"
-    textarea_replace['id'] = "text-replace"
+    textarea_replace['id'] = "replace_text"
+    textarea_replace['name'] = "replace_text"
     textarea_replace['placeholder'] = "Replace with"
     textarea_replace['style'] = textarea_style + "margin-bottom:1em;"
 

@@ -13,8 +13,7 @@ $(function() {
 
   $('#content').on('mouseup', function(e) {
     var toReplace = getSelectedText();
-    console.log(toReplace)
-    $('#text-select').val(toReplace);
+    $('#find_text').val(toReplace);
   })
 
 });
