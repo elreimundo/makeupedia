@@ -1,12 +1,12 @@
 require 'net/http'
-
+include StyleHelper
 module WikisHelper
   def build_the_search(params)
-    params[:search_page].gsub(" ","_")
+    params[:search_page].gsub(" ","_").capitalize
   end
 
   def build_the_json(params)
-    title_uri = "http://en.wikipedia.org/" + build_the_search(params)
+    title_uri = "http://en.wikipedia.org/wiki/" + build_the_search(params)
     @data = {
               uri: (params[:search_page].empty? ? URI.parse("http://en.wikipedia.org/wiki/Internet") : URI.parse(title_uri)),
               ## TO DO: Trap below for empty? Or should this be an error?
@@ -25,46 +25,20 @@ module WikisHelper
   end
 
   def add_our_stuff_to(nokogiri_object)
-    # jquery-mobile-css
-    head = nokogiri_object.at_css("head")
-    link = Nokogiri::XML::Node.new "link", nokogiri_object
-    link['rel'] = "stylesheet"
-    #link['href'] = "http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css"
-    link['href'] = "/public/jquery.mobile.custom.structure.min.css"
-    head.children.last.add_next_sibling(link)
 
+    #jeffs js
     head = nokogiri_object.at_css("head")
-    link = Nokogiri::XML::Node.new "link", nokogiri_object
-    link['rel'] = "stylesheet"
-    link['href'] = "/public/jquery.mobile.custom.theme.min.css"
-    head.children.last.add_next_sibling(link)
 
-    # jquery-mobile-js
     script = Nokogiri::XML::Node.new "script", nokogiri_object
-    #script['src'] = "http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"
-    script['src'] = "/public/jquery.mobile.custom.min.js"
+    script['src'] = "/main.js"
     head.children.last.add_next_sibling(script)
 
     # body
     body = nokogiri_object.at_css("body")
     form_div = Nokogiri::XML::Node.new "div", nokogiri_object
     form_div['id'] = "bottom-menu"
-    style = "background-color:rgba(0,0,0,0.4);
-            border-top-left-radius:5px;
-            border-top-right-radius:5px;
-            width:80%;
-            height:35%;
-            position:fixed;
-            left:50%;
-            bottom: 0px;
-            margin-left:-40%;
-            overflow: hidden;"
+    style = StyleHelper::form_style
     form_div['style'] = style
-
-    # # iframe
-    # iframe = Nokogiri::XML::Node.new "iframe", nokogiri_object
-    # iframe['src'] = "/frames"
-    # iframe['style'] = "width:90%; height:90%;  allowtransparency='true'; display:block;"
 
     # # form
     wiki_form = Nokogiri::XML::Node.new "form", nokogiri_object
@@ -76,7 +50,6 @@ module WikisHelper
 
     # first form div
     div_one = Nokogiri::XML::Node.new "div", nokogiri_object
-    div_one['style'] = "margin:0;padding:0;display:inline"
 
     # input_one on div_one
     input_one = Nokogiri::XML::Node.new "input", nokogiri_object
@@ -90,30 +63,38 @@ module WikisHelper
     input_two['type'] = "hidden"
     input_two['value'] = form_authenticity_token
 
-    # basic input, on form
-    input_basic = Nokogiri::XML::Node.new "input", nokogiri_object
-    input_basic['type'] = "text"
-    input_basic['name'] = "text-basic"
-    input_basic['id'] = "text-basic"
-    input_basic['value'] = ""
+    # first jquery div on form div
+    textarea_style = StyleHelper::text_area_style
+    div_jq = Nokogiri::XML::Node.new "div", nokogiri_object
+    textarea_select = Nokogiri::XML::Node.new "textarea", nokogiri_object
+    textarea_select['type'] = "textarea"
+    textarea_select['id'] = "text-select"
+    textarea_select['placeholder'] = "Select or type some text to replace"
+    textarea_select['style'] = textarea_style
 
-    # add them in, last first
+    textarea_replace = Nokogiri::XML::Node.new "textarea", nokogiri_object
+    textarea_replace['type'] = "textarea"
+    textarea_replace['id'] = "text-replace"
+    textarea_replace['placeholder'] = "Replace with"
+    textarea_replace['style'] = textarea_style + "margin-bottom:1em;"
+
+    button = Nokogiri::XML::Node.new "input", nokogiri_object
+    button['type'] = "submit"
+    button['value'] = "Submit"
+    button['style'] = StyleHelper::button_style_blue
+
+    div_jq.add_child(textarea_select)
+    div_jq.add_child(textarea_replace)
+    div_jq.add_child(button)
+
     div_one.add_child(input_one)
     div_one.add_child(input_two)
-    form_div.add_child(div_one)
-    form_div.add_child(input_basic)
+
+    wiki_form.add_child(div_one)
+    wiki_form.add_child(div_jq)
     form_div.add_child(wiki_form)
 
-    #form_div.add_child(iframe)
     body.children.last.add_next_sibling(form_div)
-
-# #<form accept-charset="UTF-8" action="/wikis" class="main-form" data-remote="true" method="post">
-#     <div style="margin:0;padding:0;display:inline">
-#       <input name="utf8" type="hidden" value="✓">
-#       <input name="authenticity_token" type="hidden" value="ne+CtNs/sStCk4p5uGHjaQO53wu4RVpMjfStaIgIVXw=">
-#     </div>
-#     <input type="text" name="text-basic" id="text-basic" value="">
-# #</form>
 
   end
 

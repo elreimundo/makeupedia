@@ -1,0 +1,17 @@
+#replacement-dialog {
+  display: none;
+}
+
+#replacement-dialog textarea {
+  margin: 5%;
+  width: 90%;
+  height: 90%;
+}
+
+.ui-dialog-titlebar-close {
+  display: none;
+}
+
+.article {
+  margin: 25px;
+}
