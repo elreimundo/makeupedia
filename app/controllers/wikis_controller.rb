@@ -15,7 +15,7 @@ class WikisController < ApplicationController
   end
 
   def revise
-    render template: 'wikis/revise',layout: 'lazy_load'
+    render template: 'wikis/revise', layout: 'lazy_load'
   end
 
 end
