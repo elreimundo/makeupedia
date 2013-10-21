@@ -31,7 +31,10 @@ class WikisController < ApplicationController
 
 
   def reconstructed
-    Page.where()
+    # find the page with the ending that is passed in through params[:page]
+    # associate that page with the user that is passed in through params[:user_id]
+    # if no params[:user_id], associate with current_user
+    # if no params[:user_id] and no current_user, just pull in the wikipedia text
   end
 
 end
