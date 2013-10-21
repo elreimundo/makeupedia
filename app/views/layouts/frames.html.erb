@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -35,20 +36,14 @@
     <%= favicon_link_tag 'makeupedia.ico', :rel => 'shortcut icon' %>
 
     <%= javascript_include_tag "application" %>
+
+    <style type="text/css">
+      <!-- BODY {background:none transparent;}-->
+    </style>
   </head>
   <body>
     <div class="container">
       <%= yield %>
-      <footer>
-        <span>&copy; Makeupedia <%= Time.now.year %></span>
-        <span class="span-right">
-          <% if current_user %>
-            <%= "Signed in as " + current_user.email %> | <%= link_to "Logout", logout_path %>
-          <% else %>
-            <%= link_to "Sign Up", signup_path %> | <%= link_to "Log In", login_path %>
-          <% end %>
-        </span>
-      </footer>
 
     </div> <!-- /container -->
 

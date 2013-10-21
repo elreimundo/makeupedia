@@ -3,6 +3,7 @@ Mwiki::Application.routes.draw do
   resources :wikis
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
+  resources :frames, only: [:index]
 
   match "/signup", to: 'users#new', as: '/signup'
   match "/login", to: 'sessions#new', as: '/login'
