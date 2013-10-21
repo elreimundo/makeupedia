@@ -1,6 +1,8 @@
 require 'net/http'
+require 'nokogiri'
 
 module WikisHelper
+  extend self
   def build_the_json(params)
     @data = {uri: (params[:url].empty? ? URI.parse("http://en.wikipedia.org/wiki/Internet") : URI.parse(params[:url])),
     search_text: (params[:search].empty? ? Regexp.new("internet", Regexp::IGNORECASE) : Regexp.new(params[:search], Regexp::IGNORECASE)),
@@ -21,11 +23,14 @@ module WikisHelper
   end
 
   def parse_the_page(page)
-    Nokogiri::HTML(Net::HTTP.get_response(page).body.force_encoding('UTF-8'))
+    nokogiri_object = Nokogiri::HTML(Net::HTTP.get_response(page).body.force_encoding('UTF-8'))
+    nokogiri_object.css('title')[0].content = nokogiri_object.css('title')[0].content.gsub('Wikipedia, the free encyclopedia', 'Makeupedia, the false encyclopedia')
+    nokogiri_object
   end
 
   def apply_lots_of_changes(params)
     page = Page.find(params[:id])
+    p page.url
     page_user = PageUser.where('page_id=?', page.id).where('user_id=?',params[:user_id].to_i).first
     nokogiri_object = parse_the_page(URI.parse(page.url))
     page_user.changes.each do |change|
@@ -38,4 +43,13 @@ module WikisHelper
   def wrap(object)
     {content: object.serialize(:encoding => 'UTF-8')}
   end
+
+  def just_display_the_stuff(ending)
+    nokogiri_object = parse_the_page(URI.parse("http://en.wikipedia.org/wiki/#{ending}"))
+    {content: nokogiri_object.css('body')[0].serialize(:encoding => 'UTF-8'), title: nokogiri_object.css('title')[0].serialize(:encoding => 'UTF-8')}
+  end
+end
+
+if $0 == __FILE__
+  p WikisHelper.just_display_the_stuff("Internet")
 end

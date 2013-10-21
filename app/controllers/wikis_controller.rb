@@ -27,8 +27,11 @@ class WikisController < ApplicationController
     render template: 'wikis/revise', layout: 'lazy_load'
   end
 
-  def reconstructed
-    # find the page with the ending that is passed in through params[:page]
+  def reconstruct
+    # page = Page.where('ending=?',params[:page])
+    # page = Page.create(ending: params[:page]) unless page
+    # param[:user_id] ? page_user = PageUser.where('user_id=?',params[:user_id]) : fishsticks
+    render json: just_display_the_stuff(params[:page]).to_json
     # associate that page with the user that is passed in through params[:user_id]
     # if no params[:user_id], associate with current_user
     # if no params[:user_id] and no current_user, just pull in the wikipedia text
