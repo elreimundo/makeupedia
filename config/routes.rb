@@ -7,6 +7,8 @@ Mwiki::Application.routes.draw do
   match "/signup", to: 'users#new', as: '/signup'
   match "/login", to: 'sessions#new', as: '/login'
   match "/logout", to: 'sessions#destroy', as: '/logout'
+
+  get "/wiki/:page", to: 'wikis#revise'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
