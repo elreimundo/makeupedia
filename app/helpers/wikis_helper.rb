@@ -10,14 +10,32 @@ module WikisHelper
   end
 
   def build_the_page
-    content = Net::HTTP.get_response(@data[:uri]).body.force_encoding('UTF-8')
-    object_to_break = Nokogiri::HTML(content)
+    object_to_break = parse_the_page(@data[:uri])
     break_the_object(object_to_break)
-    { content: object_to_break.serialize(:encoding => 'UTF-8') }
+    wrap(object_to_break)
   end
 
   def break_the_object(node)
     return node.content = node.content.to_s.gsub(@data[:search_text],@data[:replace_text]) if node.children.empty? && node.text?
-    node.children.each{|e| break_the_object(e)} unless node.children.empty?
+    node.children.each{ |e| break_the_object(e) } unless node.children.empty?
+  end
+
+  def parse_the_page(page)
+    Nokogiri::HTML(Net::HTTP.get_response(page).body.force_encoding('UTF-8'))
+  end
+
+  def apply_lots_of_changes(params)
+    page = Page.find(params[:id])
+    page_user = PageUser.where('page_id=?', page.id).where('user_id=?',params[:user_id].to_i).first
+    nokogiri_object = parse_the_page(URI.parse(page.url))
+    page_user.changes.each do |change|
+      @data = {search_text: Regexp.new(change.find_text, Regexp::IGNORECASE), replace_text: change.replace_text}
+      break_the_object(nokogiri_object)
+    end
+    wrap(nokogiri_object)
+  end
+
+  def wrap(object)
+    {content: object.serialize(:encoding => 'UTF-8')}
   end
 end

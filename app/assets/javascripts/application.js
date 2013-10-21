@@ -17,8 +17,7 @@
 var MakeRequest = {
   init: function() {
     $('.main-form').on('ajax:success', this.appendResponse);
-    $('.main-form').on('ajax:beforeSend', function() {$('#loading-indicator').show()});
-    $('.main-form').on('ajax:complete', function() {$('#loading-indicator').hide()});
+    $('.all-changes').on('ajax:success', this.appendResponse);
   },
 
   appendResponse: function(event, data) {
