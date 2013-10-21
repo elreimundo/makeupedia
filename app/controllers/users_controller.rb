@@ -14,11 +14,10 @@ class UsersController < ApplicationController
   end
 
   def show
-    if current_user.id == params[:id].to_i
+    if current_user && current_user.id == params[:id].to_i
       @user = current_user
     else
       redirect_to :root
     end
-
   end
 end
