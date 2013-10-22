@@ -5,6 +5,6 @@ class Page < ActiveRecord::Base
   validates :ending, presence: true, uniqueness: true
 
   def url
-    "http://en.wikipedia.org/wiki/" + self.ending
+    "http://en.wikipedia.org/wiki/" + self.ending.split(' ').join('_')
   end
 end
