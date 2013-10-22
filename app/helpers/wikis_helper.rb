@@ -5,31 +5,27 @@ module WikisHelper
   extend self
 
   def build_the_search(params)
-    params[:search_page].gsub(" ","_").capitalize if params[:search_page].include? " "
+    params[:ending].gsub(" ","_").capitalize if params[:ending].include? " "
   end
 
   def build_the_json(params)
-    @data = {uri: (params[:ending].empty? ? URI.parse("http://en.wikipedia.org/wiki/Internet") : URI.parse("http://en.wikipedia.org/wiki/#{params[:ending].split(' ').join('_')}")),
-            search_text: (params[:search].empty? ? Regexp.new("internet", Regexp::IGNORECASE) : Regexp.new(params[:search], Regexp::IGNORECASE)),
-            replace_text: (params[:replace].empty? ? "Al Gore" : params[:replace])}
+    build_the_search(params)
+    @data = {uri: (params[:ending].empty? ? URI.parse("http://en.wikipedia.org/wiki/Internet") : URI.parse("http://en.wikipedia.org/wiki/#{params[:ending].split(' ').join('_').capitalize}")),
+            search_text: (params[:search].nil? ? Regexp.new("internet", Regexp::IGNORECASE) : Regexp.new(params[:search], Regexp::IGNORECASE)),
+            replace_text: (params[:replace].nil? ? "Al Gore" : params[:replace]),
+            ending: params[:ending]}
 
     build_the_page
   end
 
   def build_the_page
-    object_to_break = parse_the_page(@data[:uri])
-    make_necessary_text_replacements(object_to_break)
-    wrap(object_to_break)
+    nokogiri_object = parse_the_page(@data[:uri])
+    make_necessary_text_replacements(nokogiri_object)
+    add_our_stuff_to(nokogiri_object)
+    wrap(nokogiri_object)
   end
 
   def add_our_stuff_to(nokogiri_object)
-    #jeffs js
-    head = nokogiri_object.at_css("head")
-
-    script = Nokogiri::XML::Node.new "script", nokogiri_object
-    script['src'] = "/main.js"
-    head.children.last.add_next_sibling(script)
-
     # body
     body = nokogiri_object.at_css("body")
     form_div = Nokogiri::XML::Node.new "div", nokogiri_object
@@ -60,6 +56,12 @@ module WikisHelper
     input_two['type'] = "hidden"
     input_two['value'] = form_authenticity_token
 
+    # input_three on div_one
+    input_three = Nokogiri::XML::Node.new "input", nokogiri_object
+    input_three['name'] = "ending"
+    input_three['type'] = "hidden"
+    input_three['value'] = @data[:ending]
+
     # first jquery div on form div
     textarea_style = StyleHelper::text_area_style
     div_jq = Nokogiri::XML::Node.new "div", nokogiri_object
@@ -80,6 +82,7 @@ module WikisHelper
     button = Nokogiri::XML::Node.new "input", nokogiri_object
     button['type'] = "submit"
     button['value'] = "Submit"
+    button['id'] = "killer-awesome-submit-button"
     button['style'] = StyleHelper::button_style_blue
 
     div_jq.add_child(textarea_select)
@@ -88,6 +91,7 @@ module WikisHelper
 
     div_one.add_child(input_one)
     div_one.add_child(input_two)
+    div_one.add_child(input_three)
 
     wiki_form.add_child(div_one)
     wiki_form.add_child(div_jq)
@@ -103,6 +107,8 @@ module WikisHelper
 
   def parse_the_page(page)
     nokogiri_object = Nokogiri::HTML(Net::HTTP.get_response(page).body.force_encoding('UTF-8'))
+    p nokogiri_object.css('head')
+    nokogiri_object.css('head').add_child('title') if nokogiri_object.css('title').empty?
     nokogiri_object.css('title')[0].content = nokogiri_object.css('title')[0].content.gsub('Wikipedia, the free encyclopedia', 'Makeupedia, the fake encyclopedia')
     nokogiri_object
   end

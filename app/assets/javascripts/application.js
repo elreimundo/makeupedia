@@ -14,15 +14,31 @@
 //= require jquery_ujs
 //= require_tree .
 
+function getSelectedText() {
+  var text = "";
+  if (window.getSelection) {
+    text = window.getSelection().toString();
+  } else if (document.selection && document.selection.type != "Control") {
+    text = document.selection.createRange().text;
+  }
+  return text;
+}
+
 var MakeRequest = {
   init: function() {
-    $('.main-form').on('ajax:success', this.appendResponse);
+    $('.main-form').on('ajax:success', this.appendResponse)
     $('.all-changes').on('ajax:success', this.appendResponse);
   },
 
   appendResponse: function(event, data) {
     var newDoc = document.open("text/html", "replace");
-    newDoc.write(data.content);
+    newDoc.write(data.content)
+    console.log($('#content'))
+    $('#content').on('mouseup', function(e) {
+      var toReplace = getSelectedText();
+      $('#find_text').val(toReplace);
+      });
+    $('#killer-awesome-submit-button').on('ajax:success',this.appendResponse);
     newDoc.close();
   }
 }
