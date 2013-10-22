@@ -3,6 +3,10 @@
     <strong>Hi <%= @user.email %>!<br><br>
     You can update your account here:</strong><br><br>
     <%= form_for @user do |f| %>
+        <% if @user.errors.any? %>
+          <%= @user.errors.full_messages do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
       <%= f.label "Current email:" %><br>
       <%= f.text_field :email %>
       <%= f.submit "Update email" %><br>

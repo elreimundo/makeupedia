@@ -20,4 +20,19 @@ class UsersController < ApplicationController
       redirect_to :root
     end
   end
+
+  def update
+    @user = current_user
+    if params['id'].to_i == current_user.id
+      @user.email=params['user']['email']
+      if @user.save
+        redirect_to root_path
+        return
+      else
+        render 'users/show', locals:{@user => @user}
+        return
+      end
+    end
+    redirect_to root_path
+  end
 end
