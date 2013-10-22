@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131019215002) do
+ActiveRecord::Schema.define(:version => 20131021215206) do
 
   create_table "changes", :force => true do |t|
     t.text     "find_text"
@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(:version => 20131019215002) do
   end
 
   create_table "pages", :force => true do |t|
-    t.text     "url"
+    t.text     "ending"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
