@@ -6,6 +6,6 @@ class PageUser < ActiveRecord::Base
   validates_uniqueness_of :page_id, :scope => :user_id
 
   def permalink
-    "http://makeupedia.herokuapp.com/wiki/" + page.ending + "?user_id=" + user_id.to_s
+    "http://makeupedia.herokuapp.com/wiki/" + page.ending.split(' ').join('_') + "?user_id=" + user_id.to_s
   end
 end
