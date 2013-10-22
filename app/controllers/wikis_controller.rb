@@ -28,9 +28,6 @@ class WikisController < ApplicationController
   end
 
   def reconstruct
-    # page = Page.where('ending=?',params[:page])
-    # page = Page.create(ending: params[:page]) unless page
-    # param[:user_id] ? page_user = PageUser.where('user_id=?',params[:user_id]) : fishsticks
     render json: display_the_stuff_with_changes(params).to_json
     # associate that page with the user that is passed in through params[:user_id]
     # if no params[:user_id], associate with current_user
