@@ -51,7 +51,7 @@ module WikisHelper
   def display_the_stuff_with_changes(ending, user_id)
     nokogiri_object = parse_the_page(URI.parse("http://en.wikipedia.org/wiki/#{ending}"))
     page = Page.where('ending=?',ending.split('_').join(' '))
-    page = (page.empty? ? nil : page.first
+    page = (page.empty? ? nil : page.first)
     user = User.find(user_id.to_i) if user_id
     user = current_user unless user
     if page && user
