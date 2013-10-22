@@ -29,7 +29,7 @@ class UsersController < ApplicationController
         redirect_to root_path
         return
       else
-        render 'users/show', locals:{@user => @user}
+        render 'users/show'#, locals:{@user => @user}
         return
       end
     end
