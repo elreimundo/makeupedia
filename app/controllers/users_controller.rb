@@ -26,13 +26,16 @@ class UsersController < ApplicationController
     if params['id'].to_i == current_user.id
       @user.email=params['user']['email']
       if @user.save
-        redirect_to root_path
+        redirect_to user_path, :notice => 'Email has been updated!'
         return
       else
-        redirect_to user_path, :notice => 'Email has already been taken.'
+        redirect_to user_path, :notice => 'Sorry, email has already been taken.'
         return
       end
     end
     redirect_to root_path
   end
+
+  # password
+  #
 end
