@@ -13,12 +13,17 @@ module WikisHelper
 
   def build_the_page
     object_to_break = parse_the_page(@data[:uri])
+<<<<<<< HEAD
     make_necessary_text_replacements(object_to_break)
+=======
+    break_the_object(object_to_break)
+>>>>>>> 37962df837e79f9151c94aadd7ad1becc92fcb53
     wrap(object_to_break)
   end
 
   def make_necessary_text_replacements(node)
     return node.content = node.content.to_s.gsub(@data[:search_text],@data[:replace_text]) if node.children.empty? && node.text?
+<<<<<<< HEAD
     node.children.each{ |e| make_necessary_text_replacements(e) } unless node.children.empty?
   end
 
@@ -65,5 +70,39 @@ module WikisHelper
     else
       return just_display_the_stuff(params[:page])
     end
+=======
+    node.children.each{ |e| break_the_object(e) } unless node.children.empty?
+>>>>>>> 37962df837e79f9151c94aadd7ad1becc92fcb53
   end
+
+  def parse_the_page(page)
+    nokogiri_object = Nokogiri::HTML(Net::HTTP.get_response(page).body.force_encoding('UTF-8'))
+    nokogiri_object.css('title')[0].content = nokogiri_object.css('title')[0].content.gsub('Wikipedia, the free encyclopedia', 'Makeupedia, the false encyclopedia')
+    nokogiri_object
+  end
+
+  def apply_lots_of_changes(params)
+    page = Page.find(params[:id])
+    p page.url
+    page_user = PageUser.where('page_id=?', page.id).where('user_id=?',params[:user_id].to_i).first
+    nokogiri_object = parse_the_page(URI.parse(page.url))
+    page_user.changes.each do |change|
+      @data = {search_text: Regexp.new(change.find_text, Regexp::IGNORECASE), replace_text: change.replace_text}
+      break_the_object(nokogiri_object)
+    end
+    wrap(nokogiri_object)
+  end
+
+  def wrap(object)
+    {content: object.serialize(:encoding => 'UTF-8')}
+  end
+
+  def just_display_the_stuff(ending)
+    nokogiri_object = parse_the_page(URI.parse("http://en.wikipedia.org/wiki/#{ending}"))
+    {content: nokogiri_object.css('body')[0].serialize(:encoding => 'UTF-8'), title: nokogiri_object.css('title')[0].serialize(:encoding => 'UTF-8')}
+  end
+end
+
+if $0 == __FILE__
+  p WikisHelper.just_display_the_stuff("Internet")
 end

@@ -13,7 +13,6 @@ class WikisController < ApplicationController
     render json: data.to_json
   end
 
-
   def show
     if current_user
       params[:user_id] = current_user.id
@@ -23,7 +22,6 @@ class WikisController < ApplicationController
       redirect_to root_path
     end
   end
-
 
   def revise
     render template: 'wikis/revise', layout: 'lazy_load'
@@ -38,5 +36,4 @@ class WikisController < ApplicationController
     # if no params[:user_id], associate with current_user
     # if no params[:user_id] and no current_user, just pull in the wikipedia text
   end
-
 end
