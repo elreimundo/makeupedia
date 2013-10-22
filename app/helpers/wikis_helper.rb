@@ -56,12 +56,14 @@ module WikisHelper
     user = current_user unless user
     if page && user
       page_user = PageUser.where('page_id=?', page.id).where('user_id=?',user.id)
-      page_user = page_user.first if page_user
-      page_user.changes.each do |change|
-        @data = {search_text: Regexp.new(change.find_text, Regexp::IGNORECASE), replace_text: change.replace_text}
-        make_necessary_text_replacements(nokogiri_object)
-      end
+      unless page_user.empty?
+        page_user = page_user.first
+        page_user.changes.each do |change|
+          @data = {search_text: Regexp.new(change.find_text, Regexp::IGNORECASE), replace_text: change.replace_text}
+          make_necessary_text_replacements(nokogiri_object)
+        end
       return {content: nokogiri_object.css('body')[0].serialize(:encoding => 'UTF-8'), title: nokogiri_object.css('title')[0].serialize(:encoding => 'UTF-8')}
+      end
     else
       return just_display_the_stuff(params[:page])
     end
