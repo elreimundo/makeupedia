@@ -8,7 +8,6 @@ function getSelectedText() {
   return text;
 }
 
-
 $(function() {
 
   $('#content').on('mouseup', function(e) {

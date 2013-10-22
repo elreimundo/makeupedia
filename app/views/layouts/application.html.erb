@@ -40,7 +40,7 @@
     <div class="container">
       <%= yield %>
       <footer>
-        <span>&copy; Makeupedia <%= Time.now.year %></span>
+        <span>&copy; Makeupedia <%= Time.now.year %> | <%=link_to "About", about_index_path(:format => :js), :remote => true %> </span>
         <span class="span-right">
           <% if current_user %>
             <%= "Signed in as " + current_user.email %> | <%= link_to "Logout", logout_path %>
@@ -51,6 +51,10 @@
       </footer>
 
     </div> <!-- /container -->
+
+    <div id="dialog" style="display:none;">
+      <h1>Hiya</h1>
+    </div>
 
   </body>
 </html>
