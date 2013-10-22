@@ -9,13 +9,13 @@ describe WikisController do
   describe "POST #create" do
     it "should not create a new page for an anonymous user" do
       expect {
-        post :create, :url => "http://www.cnn.com", :search => "hi", :replace => "bye"
+        post :create, :ending => "Internet", :search => "hi", :replace => "bye"
       }.not_to change { Page.count }
     end
 
     it "should not create a new change for an anonymous user" do
       expect {
-        post :create, :url => "http://www.cnn.com", :search => "hi", :replace => "bye"
+        post :create, :ending => "Internet", :search => "hi", :replace => "bye"
       }.not_to change { Change.count }
     end
   end
