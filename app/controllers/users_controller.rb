@@ -29,7 +29,7 @@ class UsersController < ApplicationController
         redirect_to root_path
         return
       else
-        render 'users/show'#, locals:{@user => @user}
+        redirect_to user_path, :notice => 'Email has already been taken.'
         return
       end
     end
