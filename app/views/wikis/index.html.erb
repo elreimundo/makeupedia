@@ -1,7 +1,7 @@
 <div class="div-transparent form-group">
 
 <%= form_tag("/wikis", :method => "post", :class => "main-form", :role => "form", :remote => true) do %>
-  <%= text_field_tag "url", nil, :class => "form-control", placeholder: "Enter url" %><br>
+  <%= text_field_tag "ending", nil, :class => "form-control", placeholder: "Enter page title" %><br>
   <%= text_field_tag "search", nil, :class => "form-control", placeholder: "Enter search term" %>
   <%= text_field_tag "replace", nil, :class => "form-control top-margin", placeholder: "Enter replace term" %>
   <%= submit_tag "Submit", :class => "submit-button btn btn-primary", :disable_with => "Please wait..." %>

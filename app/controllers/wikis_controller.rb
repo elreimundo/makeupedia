@@ -2,9 +2,9 @@ class WikisController < ApplicationController
   include WikisHelper
 
   def create
-    if current_user && !params[:url].empty?
-      page = current_user.pages.where('url=?', params[:url])
-      page.empty? ? page = current_user.pages.create(:url => params[:url]) : page = page.first
+    if current_user && !params[:ending].empty?
+      page = current_user.pages.where('ending=?', params[:ending].capitalize)
+      page.empty? ? page = current_user.pages.create(:ending => params[:ending].capitalize) : page = page.first
       page_user = PageUser.where('user_id=?',current_user.id).where('page_id=?',page.id).first
       page_user.changes.create(:find_text => params[:search], :replace_text => params[:replace])
     end
@@ -33,7 +33,7 @@ class WikisController < ApplicationController
     # page = Page.where('ending=?',params[:page])
     # page = Page.create(ending: params[:page]) unless page
     # param[:user_id] ? page_user = PageUser.where('user_id=?',params[:user_id]) : fishsticks
-    render json: just_display_the_stuff(params[:page]).to_json
+    render json: display_the_stuff_with_changes(params).to_json
     # associate that page with the user that is passed in through params[:user_id]
     # if no params[:user_id], associate with current_user
     # if no params[:user_id] and no current_user, just pull in the wikipedia text

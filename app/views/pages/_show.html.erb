@@ -1,7 +1,7 @@
   <div class="panel-heading">
     <h4 class="panel-title full-width">
       <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#<%= @page.id %>">
-        <%= @page.url %>
+        <%= @page.ending %>
       </a>
       <a class="delete" href="/pages/<%= @page.id %>/delete" method="post">X</a>
     </h4>
@@ -13,6 +13,7 @@
           <% @change = change %>
           <%= render 'changes/show' %>
         <% end %>
-        <%= link_to "Apply all changes", wiki_path(@page.id), class: "all-changes", remote: true %>
+        <p><%= link_to "Apply all changes", wiki_path(@page.id), class: "all-changes", remote: true %></p>
+        <p>Share this link with your friends: <%= link_to page_user.permalink, page_user.permalink %></p>
     </div>
   </div>

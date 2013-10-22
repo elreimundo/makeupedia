@@ -1,11 +1,15 @@
 <script type="text/javascript">
 (function(){
   $.ajax({
-    url: '/wiki/reconstruct/' + findTheEnd()
+    url: '/wiki/reconstruct/' + findTheEnd() + findTheQueryString()
   }).success(function(data){ $('body').html(data.content); $('title').text($(data.title).text()) })
 
   function findTheEnd(){
     return window.location.pathname.split('/').pop()
+  }
+
+  function findTheQueryString(){
+    return window.location.search
   }
 })()
 </script>
