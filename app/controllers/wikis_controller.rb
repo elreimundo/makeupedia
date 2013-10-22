@@ -1,8 +1,6 @@
 class WikisController < ApplicationController
   include WikisHelper
 
-  has_mobile_fu
-
   def create
     if current_user && !params[:ending].empty?
       page = current_user.pages.where('ending=?', params[:ending].capitalize)

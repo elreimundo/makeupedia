@@ -5,7 +5,7 @@ module WikisHelper
   extend self
 
   def make_uri(ending)
-    base_uri = is_mobile_device? ? "http://en.m.wikipedia.org/wiki" : "http://en.wikipedia.org/wiki"
+    base_uri = mobile_device? ? "http://en.m.wikipedia.org/wiki" : "http://en.m.wikipedia.org/wiki"
     page_name = ending.gsub(" ","_").capitalize
     ending.empty? ? "#{base_uri}/Internet" : "#{base_uri}/#{page_name}"
   end
