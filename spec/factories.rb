@@ -3,7 +3,7 @@ require 'faker'
 FactoryGirl.define do
 
   factory :page do
-    url { Faker::Internet.url }
+    ending { Faker::Name.name }
   end
 
   factory :change do

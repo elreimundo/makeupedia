@@ -104,5 +104,21 @@ a.delete{
 }
 
 .acc-changes{
-  margin:10px;
+  margin:15px;
+}
+
+a.permalink{
+  font-size:10px;
+  color:blue;
+  text-decoration: none;
+}
+
+a.permalink:visited{
+  color:blue;
+  text-decoration: none;
+}
+
+a.permalink:hover{
+  color:#3333FF;
+  text-decoration: none;
 }
