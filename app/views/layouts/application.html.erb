@@ -49,6 +49,7 @@
         <span class="span-right">
           <% if current_user %>
             <%= "Signed in as " + current_user.email %> <strong>|</strong>
+            <%= link_to "Profile", user_path(current_user) %> <strong>|</strong>
             <%= link_to "Logout", logout_path %>
           <% else %>
             <%= link_to "Sign Up", signup_path %> <strong>|</strong> <%= link_to "Log In", login_path %>
