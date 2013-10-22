@@ -12,7 +12,8 @@ module StyleHelper
     left:50%;
     bottom: 0px;
     margin-left:-40%;
-    overflow: hidden;"
+    overflow: hidden;
+    z-index: 1000"
   end
 
   def text_area_style

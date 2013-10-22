@@ -4,12 +4,8 @@ include StyleHelper
 module WikisHelper
   extend self
 
-  def is_mobile?
-    ### some code here
-  end
-
   def make_uri(ending)
-    base_uri = is_mobile? ? "http://en.m.wikipedia.org/wiki" : "http://en.wikipedia.org/wiki"
+    base_uri = is_mobile_device? ? "http://en.m.wikipedia.org/wiki" : "http://en.wikipedia.org/wiki"
     page_name = ending.gsub(" ","_").capitalize
     ending.empty? ? "#{base_uri}/Internet" : "#{base_uri}/#{page_name}"
   end
