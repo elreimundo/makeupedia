@@ -12,8 +12,6 @@ Mwiki::Application.routes.draw do
   get "/wiki/reconstruct/:page", to: 'wikis#reconstruct'
   get "/wiki/:page", to: 'wikis#revise'
 
-  get "/page_users/:id/delete"
-
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
