@@ -48,11 +48,11 @@ module WikisHelper
     {content: nokogiri_object.css('body')[0].serialize(:encoding => 'UTF-8'), title: nokogiri_object.css('title')[0].serialize(:encoding => 'UTF-8')}
   end
 
-  def display_the_stuff_with_changes(params)
-    nokogiri_object = parse_the_page(URI.parse("http://en.wikipedia.org/wiki/#{params[:page]}"))
-    page = Page.where('ending=?',params[:page].split('_').join(' '))
+  def display_the_stuff_with_changes(ending, user_id)
+    nokogiri_object = parse_the_page(URI.parse("http://en.wikipedia.org/wiki/#{ending}"))
+    page = Page.where('ending=?',ending.split('_').join(' '))
     page = page.first if page
-    user = User.find(params['user_id'].to_i) if params['user_id']
+    user = User.find(user_id.to_i) if user_id
     user = current_user unless user
     if page && user
       page_user = PageUser.where('page_id=?', page.id).where('user_id=?',user.id)

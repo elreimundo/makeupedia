@@ -4,8 +4,9 @@ class WikisController < ApplicationController
   def create
     if current_user && !params[:ending].empty?
       page = current_user.pages.where('ending=?', params[:ending].capitalize)
-      page.empty? ? page = current_user.pages.create(:ending => params[:ending].capitalize) : page = page.first
-      page_user = PageUser.where('user_id=?',current_user.id).where('page_id=?',page.id).first
+      page = (page.empty? ? current_user.pages.create(:ending => params[:ending].capitalize) : page.first)
+      page_user = PageUser.where('user_id=?',current_user.id).where('page_id=?',page.id)
+      page_user = (page_user.empty? ? PageUser.create(:user_id => current_user.id, :page_id => page.id) : page_user.first)
       page_user.changes.create(:find_text => params[:search], :replace_text => params[:replace])
     end
 
@@ -28,7 +29,9 @@ class WikisController < ApplicationController
   end
 
   def reconstruct
-    render json: display_the_stuff_with_changes(params).to_json
+    page = params[:page]
+    user_id = params[:user_id]
+    render json: display_the_stuff_with_changes(page, user_id).to_json
     # associate that page with the user that is passed in through params[:user_id]
     # if no params[:user_id], associate with current_user
     # if no params[:user_id] and no current_user, just pull in the wikipedia text
