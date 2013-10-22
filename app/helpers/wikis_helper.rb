@@ -4,14 +4,24 @@ include StyleHelper
 module WikisHelper
   extend self
 
-  def build_the_search(params)
-    params[:ending].gsub(" ","_").capitalize if params[:ending].include? " "
+  def is_mobile?
+    ### some code here
+  end
+
+  def make_uri(ending)
+    base_uri = is_mobile? ? "http://en.m.wikipedia.org/wiki" : "http://en.wikipedia.org/wiki"
+    page_name = ending.gsub(" ","_").capitalize
+    ending.empty? ? "#{base_uri}/Internet" : "#{base_uri}/#{page_name}"
+  end
+
+  def build_regex(word)
+    Regexp.new(word, Regexp::IGNORECASE)
   end
 
   def build_the_json(params)
-    build_the_search(params)
-    @data = {uri: (params[:ending].empty? ? URI.parse("http://en.wikipedia.org/wiki/Internet") : URI.parse("http://en.wikipedia.org/wiki/#{params[:ending].split(' ').join('_').capitalize}")),
-            search_text: (params[:search].nil? ? Regexp.new("internet", Regexp::IGNORECASE) : Regexp.new(params[:search], Regexp::IGNORECASE)),
+    the_parsed_uri = URI.parse(make_uri(params[:ending]))
+    @data = {uri: the_parsed_uri,
+            search_text: (params[:search].nil? ? build_regex("Internet") : build_regex(params[:search])),
             replace_text: (params[:replace].nil? ? "Al Gore" : params[:replace]),
             ending: params[:ending]}
 
@@ -37,8 +47,7 @@ module WikisHelper
     wiki_form = Nokogiri::XML::Node.new "form", nokogiri_object
     wiki_form['accept-charset'] = "UTF-8"
     wiki_form['action'] = "/wikis"
-    wiki_form['class'] = "main-form"
-    wiki_form['data-remote'] = "true"
+    wiki_form['class'] = "second-form"
     wiki_form['method'] = "post"
 
     # first form div
@@ -68,14 +77,14 @@ module WikisHelper
     textarea_select = Nokogiri::XML::Node.new "textarea", nokogiri_object
     textarea_select['type'] = "textarea"
     textarea_select['id'] = "find_text"
-    textarea_select['name'] = "find_text"
+    textarea_select['name'] = "search"
     textarea_select['placeholder'] = "Select or type some text to replace"
     textarea_select['style'] = textarea_style
 
     textarea_replace = Nokogiri::XML::Node.new "textarea", nokogiri_object
     textarea_replace['type'] = "textarea"
     textarea_replace['id'] = "replace_text"
-    textarea_replace['name'] = "replace_text"
+    textarea_replace['name'] = "replace"
     textarea_replace['placeholder'] = "Replace with"
     textarea_replace['style'] = textarea_style + "margin-bottom:1em;"
 
@@ -107,7 +116,6 @@ module WikisHelper
 
   def parse_the_page(page)
     nokogiri_object = Nokogiri::HTML(Net::HTTP.get_response(page).body.force_encoding('UTF-8'))
-    p nokogiri_object.css('head')
     nokogiri_object.css('head').add_child('title') if nokogiri_object.css('title').empty?
     nokogiri_object.css('title')[0].content = nokogiri_object.css('title')[0].content.gsub('Wikipedia, the free encyclopedia', 'Makeupedia, the fake encyclopedia')
     nokogiri_object
