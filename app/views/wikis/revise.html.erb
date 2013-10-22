@@ -4,7 +4,7 @@
 
     url: '/wiki/reconstruct/' + findTheEnd() + findTheQueryString()
 
-  }).success(function(data){ $('body').html(data.content); $('title').text($(data.title).text()) })
+  }).success(function(data){ $('body').html(data.content); $('title').html($(data.title).text()) })
 
   function findTheEnd(){
     return window.location.pathname.split('/').pop()
