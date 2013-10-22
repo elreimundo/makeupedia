@@ -41,9 +41,8 @@ body {
 }
 
 .div-transparent {
-  background-color:rgba(0,0,0,0.4);
-  border-bottom-left-radius:5px;
-  border-bottom-right-radius:5px;
+  background-color:rgba(155,155,155,0.4);
+  border-radius:5px;
 }
 
 .submit-button {
@@ -72,4 +71,45 @@ footer {
 
 footer a {
   text-decoration: none;
+}
+
+.delete {
+  float: right;
+  background: #e11507;
+  color:white;
+  text-decoration: none;
+  border-radius:5px;
+  padding: 5px;
+  padding-right: 7px;
+  padding-left: 7px;
+  border: 1px white solid;
+}
+
+h4 a.delete {
+  color:white;
+  text-decoration: none;
+  font-size: 8px;
+}
+
+a.delete {
+  text-decoration: none;
+  font-size: 8px;
+  padding: 5px;
+  padding-right: 7px;
+  padding-left: 7px;
+}
+
+.delete:hover {
+  background:white;
+  color:red;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.full-width {
+  width:100%;
+}
+
+.acc-changes {
+  margin:10px;
 }

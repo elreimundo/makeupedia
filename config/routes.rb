@@ -2,6 +2,7 @@ Mwiki::Application.routes.draw do
   root :to => "wikis#index"
   resources :wikis
   resources :users
+  resources :pages, only: [:destroy]
   resources :sessions, only: [:new, :create, :destroy]
   resources :frames, only: [:index]
   resources :about, only: [:index]
@@ -9,6 +10,12 @@ Mwiki::Application.routes.draw do
   match "/signup", to: 'users#new', as: '/signup'
   match "/login", to: 'sessions#new', as: '/login'
   match "/logout", to: 'sessions#destroy', as: '/logout'
+
+  get "/wiki/reconstruct/:page", to: 'wikis#reconstruct'
+  get "/wiki/:page", to: 'wikis#revise'
+
+  get "/pages/:id/delete"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

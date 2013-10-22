@@ -4,5 +4,13 @@
     <%= submit_tag "Submit", 'data-role' => "button", 'data-inline'=> "true", 'data-theme' => "b", :disable_with => "Please wait..." %>
   <% end %>
 </div>
+<% if current_user %>
+  <div class="panel panel-default">
+    <% current_user.pages.each do |page| %>
+      <% @page = page %>
+      <%= render 'pages/show' %>
+    <% end %>
+  </div>
+<% end %>
 
 <div class="wikipage"></div>

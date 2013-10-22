@@ -17,15 +17,7 @@
 var MakeRequest = {
   init: function() {
     $('.main-form').on('ajax:success', this.appendResponse);
-    $('.main-form').on('ajax:beforeSend', this.doBeforeSend);
-    $('.main-form').on('ajax:complete', this.onComplete);
-  },
-
-  doBeforeSend: function() {
-    $('.container').slideUp();
-  },
-
-  doOnComplete: function() {
+    $('.all-changes').on('ajax:success', this.appendResponse);
   },
 
   appendResponse: function(event, data) {
@@ -36,5 +28,5 @@ var MakeRequest = {
 }
 
 $(function() {
-    MakeRequest.init();
-  });
+  MakeRequest.init();
+});

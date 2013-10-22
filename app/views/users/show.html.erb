@@ -1,0 +1,11 @@
+<div class="container">
+  <div class="div-transparent">
+    <strong>Hi <%= @user.email %>!<br><br>
+    You can update your account here:</strong><br><br>
+    <%= form_for @user do |f| %>
+      <%= f.label "Current email:" %><br>
+      <%= f.text_field :email %>
+      <%= f.submit "Update email" %><br>
+    <% end %>
+  </div>
+</div>

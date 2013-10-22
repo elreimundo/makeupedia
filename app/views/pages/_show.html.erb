@@ -1,0 +1,19 @@
+  <div class="panel-heading">
+    <h4 class="panel-title full-width">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#<%= @page.id %>">
+        <%= @page.ending %>
+      </a>
+      <a class="delete" href="/pages/<%= @page.id %>/delete" method="post">X</a>
+    </h4>
+  </div>
+  <div id="<%= @page.id %>" class="panel-collapse collapse">
+    <div class="panel-changes">
+        <% page_user = @page.page_users.where('user_id=?',current_user.id).first %>
+        <% page_user.changes.each do |change| %>
+          <% @change = change %>
+          <%= render 'changes/show' %>
+        <% end %>
+        <p><%= link_to "Apply all changes", wiki_path(@page.id), class: "all-changes", remote: true %></p>
+        <p>Share this link with your friends: <%= link_to page_user.permalink, page_user.permalink %></p>
+    </div>
+  </div>

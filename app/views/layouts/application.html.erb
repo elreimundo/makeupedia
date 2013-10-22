@@ -43,7 +43,10 @@
         <span>&copy; Makeupedia <%= Time.now.year %> | <%=link_to "About", about_index_path(:format => :js), :remote => true %> </span>
         <span class="span-right">
           <% if current_user %>
-            <%= "Signed in as " + current_user.email %> | <%= link_to "Logout", logout_path %>
+
+            <%= "Signed in as " + current_user.email %> |
+            <%= link_to "Profile", user_path(current_user) %> |
+            <%= link_to "Logout", logout_path %>
           <% else %>
             <%= link_to "Sign Up", signup_path %> | <%= link_to "Log In", login_path %>
           <% end %>
@@ -51,10 +54,6 @@
       </footer>
 
     </div> <!-- /container -->
-
-    <div id="dialog" style="display:none;">
-      <h1>Hiya</h1>
-    </div>
 
   </body>
 </html>
