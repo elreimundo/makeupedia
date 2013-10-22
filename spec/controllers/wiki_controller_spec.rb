@@ -19,5 +19,4 @@ describe WikisController do
       }.not_to change { Change.count }
     end
   end
-
 end
