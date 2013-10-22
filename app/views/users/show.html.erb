@@ -7,5 +7,13 @@
       <%= f.text_field :email %><br>
       <%= f.submit "Update email" %><br>
     <% end %>
+    <br>
+    <%= form_for @user do |f| %>
+      <%= f.label "New password" %><br>
+      <%= f.password_field :password %><br>
+      <%= f.label "Confirm new password" %><br>
+      <%= f.password_field :password_confirmation %><br>
+      <%= f.submit "Change password" %><br>
+    <% end %>
   </div>
 </div>

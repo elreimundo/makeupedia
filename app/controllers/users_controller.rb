@@ -24,18 +24,13 @@ class UsersController < ApplicationController
   def update
     @user = current_user
     if params['id'].to_i == current_user.id
-      @user.email=params['user']['email']
-      if @user.save
-        redirect_to user_path, :notice => 'Email has been updated!'
-        return
+      if @user.update_attributes(params['user'])
+        redirect_to user_path, :notice => 'Your profile has been updated!'
       else
-        redirect_to user_path, :notice => 'Sorry, email has already been taken.'
-        return
+        redirect_to user_path, :notice => 'Sorry, your profile could not be updated.'
       end
+    else
+      redirect_to root_path
     end
-    redirect_to root_path
   end
-
-  # password
-  #
 end
