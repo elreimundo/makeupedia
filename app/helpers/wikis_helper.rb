@@ -1,34 +1,50 @@
 require 'net/http'
 require 'nokogiri'
+
+module TextReplacer
+  def search_and_replace(node, search, replace)
+    node.content = node.content.to_s.gsub(search,replace)
+  end
+
+  def text_node?(node)
+    node.children.empty? && node.text?
+  end
+
+  def deep_text_replace(node, search, replace)
+    if text_node?(node)
+      search_and_replace(node, search, replace)
+    else
+      node.children.each do |child|
+        deep_text_replace(child, search, replace)
+      end
+    end
+  end
+end
+
 module WikisHelper
   extend self
+  include TextReplacer
 
   def make_uri(ending)
     base_uri = mobile_device? ? "http://en.m.wikipedia.org/wiki" : "http://en.wikipedia.org/wiki"
     page_name = ending.gsub(" ","_").capitalize
-    ending.empty? ? "#{base_uri}/Internet" : "#{base_uri}/#{page_name}"
-  end
-
-
-  def make_necessary_text_replacements(node)
-    return node.content = node.content.to_s.gsub(@data[:search_text],@data[:replace_text]) if node.children.empty? && node.text?
-    node.children.each{ |e| make_necessary_text_replacements(e) } unless node.children.empty?
+    url = ending.empty? ? "#{base_uri}/Internet" : "#{base_uri}/#{page_name}"
+    URI.parse(url)
   end
 
   def parse_the_page(page)
-    nokogiri_object = Nokogiri::HTML(Net::HTTP.get_response(page).body.force_encoding('UTF-8'))
-    nokogiri_object.css('head').add_child('title') if nokogiri_object.css('title').empty?
-    nokogiri_object.css('title')[0].content = nokogiri_object.css('title')[0].content.gsub('Wikipedia, the free encyclopedia', 'Makeupedia, the fake encyclopedia')
-    nokogiri_object
+    Nokogiri::HTML(Net::HTTP.get_response(page).body.force_encoding('UTF-8'))
   end
 
-  def just_display_the_stuff(ending)
-    nokogiri_object = parse_the_page(URI.parse(make_uri(ending)))
-    {content: nokogiri_object.css('body')[0].serialize(:encoding => 'UTF-8'), title: nokogiri_object.css('title')[0].serialize(:encoding => 'UTF-8')}
+  def replace_wikipedia_title(noko_obj)
+    noko_obj.css('title')[0].content = noko_obj.css('title')[0].content.gsub('Wikipedia, the free encyclopedia', 'Makeupedia, the fake encyclopedia')
   end
 
-  def display_the_stuff_with_changes(ending, user_id)
-    nokogiri_object = parse_the_page(URI.parse(make_uri(ending)))
+  def get_modified_wikipedia_body(ending, user_id)
+
+    nokogiri_object = parse_the_page(make_uri(ending))
+    replace_wikipedia_title(nokogiri_object)
+
     page = Page.where('ending=?',ending.split('_').join(' '))
     page = (page.empty? ? nil : page.first)
     user = User.find(user_id.to_i) if user_id
@@ -38,14 +54,13 @@ module WikisHelper
       unless page_user.empty?
         page_user = page_user.first
         page_user.changes.each do |change|
-          @data = {search_text: ignorecase_regex(change.find_text), replace_text: change.replace_text}
-          make_necessary_text_replacements(nokogiri_object)
+          search_text = ignorecase_regex(change.find_text)
+          replace_text = change.replace_text
+          deep_text_replace(nokogiri_object, search_text, replace_text)
         end
-        return {content: nokogiri_object.css('body')[0].serialize(:encoding => 'UTF-8'), title: nokogiri_object.css('title')[0].serialize(:encoding => 'UTF-8') }
       end
-    else
-      return just_display_the_stuff(params[:page])
     end
+    {content: nokogiri_object.css('body')[0].serialize(:encoding => 'UTF-8'), title: nokogiri_object.css('title')[0].serialize(:encoding => 'UTF-8')}
   end
 
   def ignorecase_regex(word)
@@ -53,6 +68,7 @@ module WikisHelper
   end
 end
 
+
 if $0 == __FILE__
-  p WikisHelper.just_display_the_stuff("Internet")
+  p WikisHelper.get_modified_wikipedia_body("Internet")
 end

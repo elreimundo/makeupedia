@@ -31,7 +31,7 @@ class WikisController < ApplicationController
   def reconstruct
     page = params[:page]
     user_id = params[:user_id]
-    render json: display_the_stuff_with_changes(page, user_id).to_json
+    render json: get_modified_wikipedia_body(page, user_id).to_json
     # associate that page with the user that is passed in through params[:user_id]
     # if no params[:user_id], associate with current_user
     # if no params[:user_id] and no current_user, just pull in the wikipedia text
