@@ -133,12 +133,12 @@ module WikisHelper
   end
 
   def just_display_the_stuff(ending)
-    nokogiri_object = parse_the_page(URI.parse("http://en.wikipedia.org/wiki/#{ending}"))
+    nokogiri_object = parse_the_page(URI.parse(make_uri(ending)))
     {content: nokogiri_object.css('body')[0].serialize(:encoding => 'UTF-8'), title: nokogiri_object.css('title')[0].serialize(:encoding => 'UTF-8')}
   end
 
   def display_the_stuff_with_changes(ending, user_id)
-    nokogiri_object = parse_the_page(URI.parse("http://en.wikipedia.org/wiki/#{ending}"))
+    nokogiri_object = parse_the_page(URI.parse(make_uri(ending)))
     page = Page.where('ending=?',ending.split('_').join(' '))
     page = (page.empty? ? nil : page.first)
     user = User.find(user_id.to_i) if user_id
@@ -151,7 +151,7 @@ module WikisHelper
           @data = {search_text: Regexp.new(change.find_text, Regexp::IGNORECASE), replace_text: change.replace_text}
           make_necessary_text_replacements(nokogiri_object)
         end
-      return {content: nokogiri_object.css('body')[0].serialize(:encoding => 'UTF-8'), title: nokogiri_object.css('title')[0].serialize(:encoding => 'UTF-8')}
+        return {content: nokogiri_object.css('body')[0].serialize(:encoding => 'UTF-8'), title: nokogiri_object.css('title')[0].serialize(:encoding => 'UTF-8') }
       end
     else
       return just_display_the_stuff(params[:page])

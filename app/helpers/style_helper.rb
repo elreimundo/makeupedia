@@ -13,7 +13,7 @@ module StyleHelper
     bottom: 0px;
     margin-left:-40%;
     overflow: hidden;
-    z-index: 1000"
+    z-index: 1000;"
   end
 
   def text_area_style
@@ -29,7 +29,8 @@ module StyleHelper
     border:solid 2px #d3d3d3;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
-    border-radius: 5px;"
+    border-radius: 5px;
+    resize:none;"
   end
 
   def button_style_blue

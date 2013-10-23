@@ -26,7 +26,10 @@ function getSelectedText() {
 
 var MakeRequest = {
   init: function() {
-    $('.main-form').on('ajax:success', this.appendResponse)
+    $('#main-form-submit').on('click', function(e){
+      e.preventDefault();
+      window.location = '/wiki/'+$('#search').val().split(' ').join('_');
+    } )
     $('.all-changes').on('ajax:success', this.appendResponse);
   },
 
@@ -41,15 +44,7 @@ var MakeRequest = {
     // 'this' is the document
     // when 'this.readyState === "complete"', you can bind your listener
     if (this.readyState === "complete") {
-      $("#content").on('mouseup', function() {
-        $('#find_text').val(getSelectedText());
-      });
 
-      $('#killer-awesome-submit-button').on('click', function(e){
-        e.preventDefault();
-        $form = $(".second-form")
-        $.post("/wikis", $form.serialize()).success(MakeRequest.appendResponse)
-      })
     }
   }
 }

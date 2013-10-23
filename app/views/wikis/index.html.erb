@@ -1,7 +1,7 @@
 <div class="div-transparent">
-  <%= form_tag("/wikis", :method => "post", :class => "main-form", :remote => true) do %>
+  <%= form_tag("/wiki", :method => "get", :class => "main-form") do %>
     <%= text_field_tag "search_page", nil, :type => "search", :id => "search", :name => "ending", placeholder: "Enter search term" %><br>
-    <%= submit_tag "Submit", 'data-role' => "button", 'data-inline'=> "true", 'data-theme' => "b", :disable_with => "Please wait..." %>
+    <%= submit_tag "Submit", 'id' =>'main-form-submit', 'data-role' => "button", 'data-inline'=> "true", 'data-theme' => "b" %>
   <% end %>
 </div>
 <% if current_user %>
