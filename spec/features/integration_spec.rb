@@ -24,7 +24,7 @@ describe "the signin process", :type => :feature do
     click_button 'Log In'
     visit '/'
     within(".main-form") do
-      fill_in 'url', :with => 'http://www.cnn.com'
+      fill_in 'ending', :with => 'Internet'
       fill_in 'search', :with => 'the'
       fill_in 'replace', :with => 'stuff'
     end
@@ -42,7 +42,7 @@ describe "the signin process", :type => :feature do
     click_button 'Log In'
     visit '/'
     within(".main-form") do
-      fill_in 'url', :with => 'http://www.cnn.com'
+      fill_in 'ending', :with => 'Internet'
       fill_in 'search', :with => 'the'
       fill_in 'replace', :with => 'stuff'
     end

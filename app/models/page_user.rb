@@ -2,10 +2,10 @@ class PageUser < ActiveRecord::Base
 	attr_accessible :user_id, :page_id
   belongs_to :user
   belongs_to :page
-  has_many :changes
+  has_many :changes, dependent: :destroy
   validates_uniqueness_of :page_id, :scope => :user_id
 
   def permalink
-    "http://makeupedia.herokuapp.com/wiki/" + page.ending + "?user_id=" + user_id.to_s
+    "http://makeupedia.herokuapp.com/wiki/" + page.ending.split(' ').join('_') + "?user_id=" + user_id.to_s
   end
 end
