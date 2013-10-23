@@ -1,3 +1,4 @@
+<%= javascript_include_tag 'back-home' %>
 <div class="div-transparent">
   <%= form_tag("/wiki", :method => "get", :class => "main-form") do %>
     <%= text_field_tag "search_page", nil, :type => "search", :id => "search", :name => "ending", placeholder: "Enter search term" %><br>

@@ -1,6 +1,5 @@
 require 'net/http'
 require 'nokogiri'
-include StyleHelper
 module WikisHelper
   extend self
 

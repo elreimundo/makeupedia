@@ -12,43 +12,18 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
-
-function getSelectedText() {
-  var text = "";
-  if (window.getSelection) {
-    text = window.getSelection().toString();
-  } else if (document.selection && document.selection.type != "Control") {
-    text = document.selection.createRange().text;
-  }
-  return text;
-}
+//= require jquery.mobile-1.3.2.min
 
 var MakeRequest = {
   init: function() {
     $('#main-form-submit').on('click', function(e){
       e.preventDefault();
       window.location = '/wiki/'+$('#search').val().split(' ').join('_');
-    } )
-    $('.all-changes').on('ajax:success', this.appendResponse);
-  },
-
-  appendResponse: function(event, data) {
-    var newDoc = document.open("text/html", "replace");
-    newDoc.write(data.content)
-    $(newDoc).on('readystatechange', MakeRequest.bindListeners);
-    newDoc.close();
-  },
-
-  bindListeners: function(e) {
-    // 'this' is the document
-    // when 'this.readyState === "complete"', you can bind your listener
-    if (this.readyState === "complete") {
-
-    }
+    })
   }
 }
 
 $(function() {
   MakeRequest.init();
 });
+

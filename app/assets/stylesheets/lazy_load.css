@@ -1,23 +1,21 @@
-module StyleHelper
-
-  def form_style
-    "background-color:rgba(0,0,0,0.4);
-    border-top-left-radius:5px;
-    border-top-right-radius:5px;
+#floating-selection-search-form {
+    background-color:rgba(0,0,0,0.4);
+    border-bottom-left-radius:5px;
+    border-bottom-right-radius:5px;
     width:80%;
     height:50%;
-    min-height:15em;
-    max-height:7em;
+    min-height:7em;
+    max-height:15em;
     position:fixed;
     left:50%;
-    bottom: 0px;
+    top: 0px;
     margin-left:-40%;
     overflow: hidden;
-    z-index: 1000;"
-  end
+    z-index: 1000;
+}
 
-  def text_area_style
-    "font-family: Helvetica,Arial,sans-serif !important;
+.floating-selection-textarea {
+    font-family: Helvetica,Arial,sans-serif !important;
     font-size: 16px !important;
     display: block;
     margin-left: auto;
@@ -30,11 +28,11 @@ module StyleHelper
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
-    resize:none;"
-  end
+    resize:none;
+}
 
-  def button_style_blue
-    "-webkit-animation-delay: 0s;
+#killer-awesome-submit-button {
+    -webkit-animation-delay: 0s;
     -webkit-animation-direction: normal;
     -webkit-animation-duration: 0s;
     -webkit-animation-fill-mode: none;
@@ -287,7 +285,5 @@ module StyleHelper
     writing-mode: lr-tb;
     z-index: auto;
     zoom: 1;
-    display:block; margin:0 auto;"
-  end
-
-end
+    display:block; margin:0 auto;
+}
