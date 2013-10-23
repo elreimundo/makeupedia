@@ -40,26 +40,17 @@ module WikisHelper
     noko_obj.css('title')[0].content = noko_obj.css('title')[0].content.gsub('Wikipedia, the free encyclopedia', 'Makeupedia, the fake encyclopedia')
   end
 
-  def get_modified_wikipedia_body(ending, user_id)
+  def get_modified_wikipedia_body(ending, changes)
 
     nokogiri_object = parse_the_page(make_uri(ending))
     replace_wikipedia_title(nokogiri_object)
 
-    page = Page.where('ending=?',ending.split('_').join(' '))
-    page = (page.empty? ? nil : page.first)
-    user = User.find(user_id.to_i) if user_id
-    user = current_user unless user
-    if page && user
-      page_user = PageUser.where('page_id=?', page.id).where('user_id=?',user.id)
-      unless page_user.empty?
-        page_user = page_user.first
-        page_user.changes.each do |change|
-          search_text = ignorecase_regex(change.find_text)
-          replace_text = change.replace_text
-          deep_text_replace(nokogiri_object, search_text, replace_text)
-        end
-      end
+    changes.each do |change|
+      search_text = ignorecase_regex(change.find_text)
+      replace_text = change.replace_text
+      deep_text_replace(nokogiri_object, search_text, replace_text)
     end
+
     {content: nokogiri_object.css('body')[0].serialize(:encoding => 'UTF-8'), title: nokogiri_object.css('title')[0].serialize(:encoding => 'UTF-8')}
   end
 
