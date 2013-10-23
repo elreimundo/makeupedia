@@ -23,10 +23,14 @@ class UsersController < ApplicationController
 
   def update
     @user = current_user
-
     redirect_to root_path, :notice => 'Please sign in to see your profile.' and return unless params['id'].to_i == current_user.id
 
-    if params['user']['email'].present? == true
+    if params['user']['email'].present? && params['user']['current_password'].present? && @user.password == params['user']['current_password']
+      email_and_password_update
+      return
+    end
+
+    if params['user']['email'].present?
       change_email
       return
     elsif  params['user']['current_password'].present? && @user.password == params['user']['current_password']
@@ -54,6 +58,27 @@ class UsersController < ApplicationController
       redirect_to user_path, :notice => 'Your password has been updated!'
     else
       redirect_to user_path, :notice => 'Your new password does not match.'
+    end
+  end
+
+  def email_and_password_update
+    current_user.email = params['user']['email']
+
+    if params['user']['password'].length == 0
+      redirect_to user_path, :notice => "Make sure your new password is not blank. Note: you may change your email address without current password"
+      return
+    elsif params['user']['password'] != params['user']['password_confirmation']
+      redirect_to user_path, :notice => "Password does not match confirmation"
+      return
+    else
+      current_user.password = params['user']['password']
+    end
+
+    if current_user.save
+      redirect_to user_path, :notice => 'Both your email and password have been updated!'
+      return
+    else
+      redirect_to user_path, :notice => 'Sorry your fields were not all valid, please try again.'
     end
   end
 end
