@@ -12,6 +12,6 @@
         <% @change = change %>
         <%= render 'changes/show' %>
       <% end %>
-      <p class="acc-changes"><%= link_to "Apply all changes", wiki_path(@page.id), class: "all-changes", remote: true %></p>
+      <p class="acc-changes"><%= link_to "Apply all changes", '/wiki/'+@page.ending.split(' ').join('_'), class: "all-changes", 'data-ajax' => 'false' %></p>
   </div>
 </div>
