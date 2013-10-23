@@ -17,16 +17,6 @@ class WikisController < ApplicationController
 
   end
 
-  def show
-    if current_user
-      params[:user_id] = current_user.id
-      data = apply_lots_of_changes(params)
-      render json: data.to_json
-    else
-      redirect_to root_path
-    end
-  end
-
   def revise
     @ending = params[:page]
     page = Page.where('ending=?',@ending.split('_').join(' ').capitalize)
