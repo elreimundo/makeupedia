@@ -13,9 +13,9 @@
  */
 
 html, body {
-    margin: 0;
-    width: 100%;
-    height: 100%;
+  margin: 0;
+  width: 100%;
+  height: 100%;
 }
 
 body {
@@ -23,9 +23,17 @@ body {
   background-size: cover;
 }
 
+.container {
+  margin-right: 10%;
+  margin-left: 10%;
+  position: relative;
+}
+
 .main-form {
-  padding:1.5em;
-  margin-top:1.5em;
+  padding-top:2em;
+  padding-left:2em;
+  padding-right:2em;
+  padding-bottom:1.2em;
 }
 
 .div-margin {
@@ -46,27 +54,26 @@ body {
 }
 
 #loading-indicator {
-    background-color: #000;
-    opacity: 0.3;
-    position: absolute;
-    height: 100%;
-    width: 100%;
+  background-color: #000;
+  opacity: 0.3;
+  position: absolute;
+  height: 100%;
+  width: 100%;
 }
 
 .span-right {
   float: right;
-  margin-right:3.5em;
 }
 
 footer {
-  background-color:rgba(155,155,155,0.4);
-  border-radius:5px;
-  color:white;
-  padding:10px;
-  padding-left:20px;
+  padding:.5em;
 }
 
-.delete{
+footer a {
+  text-decoration: none;
+}
+
+.delete {
   float: right;
   background: #e11507;
   color:white;
@@ -78,13 +85,13 @@ footer {
   border: 1px white solid;
 }
 
-h4 a.delete{
+h4 a.delete {
   color:white;
   text-decoration: none;
   font-size: 8px;
 }
 
-a.delete{
+a.delete {
   text-decoration: none;
   font-size: 8px;
   padding: 5px;
@@ -92,18 +99,18 @@ a.delete{
   padding-left: 7px;
 }
 
-.delete:hover{
+.delete:hover {
   background:white;
   color:red;
   text-decoration: none;
   transition: 0.2s;
 }
 
-.full-width{
+.full-width {
   width:100%;
 }
 
-.acc-changes{
+.acc-changes {
   margin:15px;
 }
 

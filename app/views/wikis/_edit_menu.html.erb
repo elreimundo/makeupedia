@@ -1,0 +1,12 @@
+<div id="floating-selection-search-form">
+  <%= form_tag("/wikis", :method => "post", :class => "second-form", :id => "second-form") do %>
+
+  <%= hidden_field_tag "ending", nil, :value => @ending %>
+
+  <%= text_area_tag "search", nil, :id => "find_text", :class => "floating-selection-textarea", :placeholder => "Select or type some text to replace" %>
+
+  <%= text_area_tag "replace", nil, :id => "replace_text", :class => "floating-selection-textarea", :placeholder => "Replace with" %>
+
+<%= submit_tag "Submit", 'id' => 'killer-awesome-submit-button' %>
+<% end %>
+</div>

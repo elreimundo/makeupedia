@@ -12,22 +12,18 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
+//= require jquery.mobile-1.3.2.min
 
 var MakeRequest = {
   init: function() {
-    $('.main-form').on('ajax:success', this.appendResponse);
-    $('.all-changes').on('ajax:success', this.appendResponse);
-  },
-
-  appendResponse: function(event, data) {
-    var newDoc = document.open("text/html", "replace");
-    newDoc.write(data.content);
-    newDoc.close();
+    $('#main-form-submit').on('click', function(e){
+      e.preventDefault();
+      window.location = '/wiki/'+$('#search').val().split(' ').join('_');
+    })
   }
 }
 
 $(function() {
-    $('#loading-indicator').hide()
-    MakeRequest.init();
-  });
+  MakeRequest.init();
+});
+

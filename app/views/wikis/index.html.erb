@@ -1,12 +1,9 @@
-<div class="div-transparent form-group">
-
-<%= form_tag("/wikis", :method => "post", :class => "main-form", :role => "form", :remote => true) do %>
-  <%= text_field_tag "ending", nil, :class => "form-control", placeholder: "Enter page title" %><br>
-  <%= text_field_tag "search", nil, :class => "form-control", placeholder: "Enter search term" %>
-  <%= text_field_tag "replace", nil, :class => "form-control top-margin", placeholder: "Enter replace term" %>
-  <%= submit_tag "Submit", :class => "submit-button btn btn-primary", :disable_with => "Please wait..." %>
-<% end %>
-
+<%= javascript_include_tag 'back-home' %>
+<div class="div-transparent">
+  <%= form_tag("/wiki", :method => "get", :class => "main-form") do %>
+    <%= text_field_tag "search_page", nil, :type => "search", :id => "search", :name => "ending", placeholder: "Enter search term" %><br>
+    <%= submit_tag "Submit", 'id' =>'main-form-submit', 'data-role' => "button", 'data-inline'=> "true", 'data-theme' => "b" %>
+  <% end %>
 </div>
 <% if current_user %>
   <div class="panel panel-default">
