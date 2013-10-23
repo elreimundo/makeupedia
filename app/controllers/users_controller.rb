@@ -24,13 +24,33 @@ class UsersController < ApplicationController
   def update
     @user = current_user
     if params['id'].to_i == current_user.id
-      if @user.update_attributes(params['user'])
-        redirect_to user_path, :notice => 'Your profile has been updated!'
+      if @user.password == params['user']['current_password']
+        change_password
+        return
       else
-        redirect_to user_path, :notice => 'Sorry, your profile could not be updated.'
+        redirect_to user_path, :notice => 'Your current password is incorrect.'
+        return
       end
+    end
+    redirect_to root_path, :notice => 'You need to be signed in to see your profile.'
+  end
+
+  def change_email
+    current_user.email = params['user']['email']
+    if current_user.save
+      redirect_to user_path, :notice => 'Your email has been updated!'
     else
-      redirect_to root_path
+      redirect_to user_path, :notice => 'Sorry that email is already in use.'
+    end
+  end
+
+  def change_password
+    if params['user']['password'] == params['user']['password_confirmation']
+      current_user.password = params['user']['password']
+      current_user.save
+      redirect_to user_path, :notice => 'Your password has been updated!'
+    else
+      redirect_to user_path, :notice => 'Your new password does not match.'
     end
   end
 end

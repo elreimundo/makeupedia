@@ -9,6 +9,8 @@
     <% end %>
     <br>
     <%= form_for @user do |f| %>
+      <%= f.label "Current password" %><br>
+      <%= f.password_field :current_password %><br>
       <%= f.label "New password" %><br>
       <%= f.password_field :password %><br>
       <%= f.label "Confirm new password" %><br>
