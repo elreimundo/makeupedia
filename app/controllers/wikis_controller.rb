@@ -2,10 +2,9 @@ class WikisController < ApplicationController
   include WikisHelper
 
   def create
-    puts params
     if current_user && !params[:ending].empty?
-      page = current_user.pages.where('ending=?', params[:ending].capitalize.split('_').join(' '))
-      page = (page.empty? ? current_user.pages.create(:ending => params[:ending].capitalize.split('_').join(' ')) : page.first)
+      page = current_user.pages.where('ending=?', params[:ending].split('_').join(' ').capitalize)
+      page = (page.empty? ? current_user.pages.create(:ending => params[:ending].split('_').join(' ').capitalize) : page.first)
       page_user = PageUser.where('user_id=?',current_user.id).where('page_id=?',page.id)
       page_user = (page_user.empty? ? PageUser.create(:user_id => current_user.id, :page_id => page.id) : page_user.first)
       page_user.changes.create(:ending => params[:ending], :find_text => params[:search], :replace_text => params[:replace])

@@ -29,11 +29,10 @@ module WikisHelper
     base_uri = mobile_device? ? "http://en.m.wikipedia.org/wiki" : "http://en.wikipedia.org/wiki"
     page_name = ending.gsub(" ","_").capitalize
     url = ending.empty? ? "#{base_uri}/Internet" : "#{base_uri}/#{page_name}"
-    URI.parse(url)
   end
 
   def parse_the_page(page)
-    Nokogiri::HTML(Net::HTTP.get_response(page).body.force_encoding('UTF-8'))
+    Nokogiri::HTML(HTTParty.get(page).body)
   end
 
   def replace_wikipedia_title(noko_obj)
