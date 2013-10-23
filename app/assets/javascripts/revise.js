@@ -54,3 +54,5 @@ function getSelectedText() {
   }
   return text;
 }
+
+
