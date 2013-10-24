@@ -15,21 +15,8 @@ class User < ActiveRecord::Base
   end
 
   def changes_for_page(ending)
-    changes.where(ending: ending)
-    # page = pages.where(:ending => ending)
-    # page.empty? ? [] : page.first.changes
+    return [] unless page = Page.find_by(:ending => ending)
+    page_user = PageUser.find_or_create_by(:user_id => self.id, :page_id => page.id)
+    page_user.changes
   end
-
-
-
-  #   # page = Page.where('ending=?',ending.split('_').join(' '))
-  #   # page = (page.empty? ? nil : page.first)
-  #   # user = User.find(user_id.to_i) if user_id
-  #   # user = current_user unless user
-  #   # if page && user
-  #   #   page_user = PageUser.where('page_id=?', page.id).where('user_id=?',user.id)
-  #   #   unless page_user.empty?
-  #   #     page_user = page_user.first
-  #   #     page_user.changes
-  # end
 end
