@@ -18,11 +18,6 @@ html, body {
   height: 100%;
 }
 
-body {
-  background:url("/assets/makeupediabw.png") fixed no-repeat;
-  background-size: cover;
-}
-
 .container {
   margin-right: 10%;
   margin-left: 10%;
