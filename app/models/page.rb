@@ -1,5 +1,5 @@
 class Page < ActiveRecord::Base
-  attr_accessible :ending
+  attr_accessible :ending, :cached
   has_many :page_users
   has_many :changes, through: :page_users
   has_many :users, through: :page_users
