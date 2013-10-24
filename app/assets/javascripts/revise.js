@@ -18,6 +18,8 @@
         })
       });
     }
+  }).fail(function(){
+    $('body').prepend('<div>Something went wrong. The page you are looking for is probably too big for us to handle. Sorry!</div>')
   })
 
 })()

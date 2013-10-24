@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 gem 'rails', '3.2.14'
 gem 'nokogiri'
+gem 'httparty'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -20,6 +21,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'database_cleaner'
   gem 'factory_girl_rails'
+  gem 'pry'
 end
 
 # Gems used only for assets and not required
