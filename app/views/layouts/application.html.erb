@@ -37,11 +37,10 @@
     <%= javascript_include_tag "application" %>
   </head>
   <body>
-    <% flash.each do |name, message| -%>
-      <%= content_tag :div, message, class: name %>
-    <% end -%>
-
     <div class="container">
+      <% flash.each do |name, message| -%>
+      <%= content_tag :div, message, class: name %>
+      <% end -%>
       <%= yield %>
       <footer>
         <span>&copy; <%=link_to "Makeupedia #{Time.now.year}", root_path, {"data-ajax" => "false"} %>  | <%=link_to "About", about_index_path, {"data-ajax" => "false"} %> </span>
