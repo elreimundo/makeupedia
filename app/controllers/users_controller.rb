@@ -39,7 +39,7 @@ class UsersController < ApplicationController
     if params['user']['email'].present? &&
        params['user']['current_password'].present? &&
        @user.password == params['user']['current_password']
-      email_and_password_updategit
+      email_and_password_update
       return
     end
 
