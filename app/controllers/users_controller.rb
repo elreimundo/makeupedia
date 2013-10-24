@@ -32,14 +32,14 @@ class UsersController < ApplicationController
   def update
     @user = current_user
     unless params['id'].to_i == current_user.id
-      redirect_to root_path, :notice => 'Please sign in to see your profile.'
+      redirect_to root_path, :alert => 'Please sign in to see your profile.'
       return
     end
 
     if params['user']['email'].present? &&
        params['user']['current_password'].present? &&
        @user.password == params['user']['current_password']
-      email_and_password_update
+      email_and_password_updategit
       return
     end
 
@@ -50,7 +50,7 @@ class UsersController < ApplicationController
       change_password
       return
     else
-      redirect_to edit_user_path, :notice => 'Please check your information before updating.'
+      redirect_to edit_user_path, :alert => 'Please check your information before updating.'
       return
     end
   end
@@ -60,7 +60,7 @@ class UsersController < ApplicationController
     if current_user.save
       redirect_to edit_user_path, :notice => 'Your email has been updated!'
     else
-      redirect_to edit_user_path, :notice => 'Sorry that email is already in use.'
+      redirect_to edit_user_path, :alert => 'Sorry that email is already in use.'
     end
   end
 
@@ -70,7 +70,7 @@ class UsersController < ApplicationController
       current_user.save
       redirect_to edit_user_path, :notice => 'Your password has been updated!'
     else
-      redirect_to edit_user_path, :notice => 'Your new password does not match.'
+      redirect_to edit_user_path, :alert => 'Your new password does not match.'
     end
   end
 
@@ -81,7 +81,7 @@ class UsersController < ApplicationController
       redirect_to edit_user_path, :notice => "Make sure your new password is not blank. Note: you may change your email address without current password"
       return
     elsif params['user']['password'] != params['user']['password_confirmation']
-      redirect_to edit_user_path, :notice => "Password does not match confirmation"
+      redirect_to edit_user_path, :alert => "Password does not match confirmation"
       return
     else
       current_user.password = params['user']['password']
@@ -91,7 +91,7 @@ class UsersController < ApplicationController
       redirect_to edit_user_path, :notice => 'Both your email and password have been updated!'
       return
     else
-      redirect_to edit_user_path, :notice => 'Sorry your fields were not all valid, please try again.'
+      redirect_to edit_user_path, :alert => 'Sorry your fields were not all valid, please try again.'
     end
   end
 end
