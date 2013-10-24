@@ -139,3 +139,18 @@ a.permalink:hover{
 .makeupedia-title-big{
   font-size:1.2em;
 }
+
+.notice, .alert {
+  border-radius:5px;
+  padding: 1em;
+  text-shadow: none;
+  width:100%;
+}
+
+.notice {
+  background-color:#66FF66;
+}
+
+.alert {
+  background-color:#FF6666;
+}
