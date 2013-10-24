@@ -1,16 +1,15 @@
-
-  <div class="div-transparent div-user">
-    <strong>Hi <%= @user.email %>!<br><br>
-    You can update your account here:</strong><br><br>
-    <%= form_for @user do |f| %>
-      <%= f.label "Enter new email:" %>
-      <%= f.text_field :email, :value =>"" %>
-      <%= f.label "Current password" %><br>
-      <%= f.password_field :current_password %>
-      <%= f.label "New password" %><br>
-      <%= f.password_field :password %>
-      <%= f.label "Confirm new password" %><br>
-      <%= f.password_field :password_confirmation %><br>
-      <%= f.submit "Update" %><br>
-    <% end %>
-  </div>
+<div class="div-transparent div-user">
+  <strong>Hi <%= @user.email %>!<br><br>
+  You can update your account here:</strong><br><br>
+  <%= form_for @user do |f| %>
+    <%= f.label "Enter new email:" %>
+    <%= f.text_field :email, :value =>"" %>
+    <%= f.label "Current password" %><br>
+    <%= f.password_field :current_password %>
+    <%= f.label "New password" %><br>
+    <%= f.password_field :password %>
+    <%= f.label "Confirm new password" %><br>
+    <%= f.password_field :password_confirmation %><br>
+    <%= f.submit "Update" %><br>
+  <% end %>
+</div>
