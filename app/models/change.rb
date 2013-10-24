@@ -4,4 +4,5 @@ class Change < ActiveRecord::Base
   has_many :pages, through: :page_user
   validates :find_text, presence: true
   validates :replace_text, presence: true
+  validates_uniqueness_of :find_text, scope: :page_user_id
 end
