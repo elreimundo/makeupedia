@@ -5,10 +5,14 @@
 
   <%= text_area_tag "search", nil, :id => "find_text", :class => "floating-selection-textarea", :placeholder => "Select or type some text to replace" %>
 
-  <%= text_area_tag "replace", nil, :id => "replace_text", :class => "floating-selection-textarea textarea2", :placeholder => "Replace with" %>
+  <%= text_field_tag "replace", nil, :id => "replace_text", :class => "floating-selection-textarea textarea2", :placeholder => "Replace with" %>
 <div id="center-the-buttons">
-<%= submit_tag "Submit", 'id' => 'killer-awesome-submit-button' %>
-<%= button_tag "Hide", 'id' => 'hide-form-button' %>
+  <div id="div-left">
+    <%= submit_tag "Submit", 'id' => 'killer-awesome-submit-button' %>
+  </div>
+  <div id="div-right">
+    <%= button_tag " Hide ", 'id' => 'hide-form-button' %>
+  </div>
 </div>
 <% end %>
 </div>

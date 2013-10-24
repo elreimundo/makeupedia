@@ -21,6 +21,7 @@
       $('#replace_text').val('');
        showForm();
       $('#find_text').val(getSelectedText());
+      $('#hide-form-button').on('vclick', function(e) {hideForm();})
       $('#killer-awesome-submit-button').on('vclick', function(e){
         e.preventDefault();
         makeReplacements();
