@@ -9,6 +9,7 @@
     $('title').text($(data.title).text());
     if (findTheQueryString().length === 0) {
       $("#content").on('mouseup touchend', function() {
+      $('#replace_text').val('');
        showForm();
       $('#find_text').val(getSelectedText());
       $('#killer-awesome-submit-button').on('vclick', function(e){

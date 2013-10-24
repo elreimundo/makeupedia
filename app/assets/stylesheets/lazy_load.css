@@ -31,6 +31,10 @@
     resize:none;
 }
 
+.ctextarea2 {
+    margin-bottom: 1em;
+}
+
 #killer-awesome-submit-button {
     -webkit-animation-delay: 0s;
     -webkit-animation-direction: normal;

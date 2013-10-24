@@ -14,17 +14,21 @@
 //= require jquery_ujs
 //= require jquery.mobile-1.3.2.min
 
+function capitalize(string){
+  return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+}
+
+function newPath(){
+  return '/wiki/'+capitalize($('#search').val().split(' ').join('_'))
+}
+
 var MakeRequest = {
   init: function() {
     $('#main-form-submit').on('click', function(e){
       e.preventDefault();
-      window.location = '/wiki/'+capitalize($('#search').val().split(' ').join('_'));
+      window.location = newPath()
     })
   }
-}
-
-function capitalize(string){
-  return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
 }
 
 $(function() {
