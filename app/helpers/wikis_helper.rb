@@ -40,15 +40,13 @@ module WikisHelper
   end
 
   def get_the_html(ending)
-    page = Page.find_by(ending: ending)
-    if page && page.cached && (Time.now - page.updated_at < 604800)
-    elsif page && page.cached
-      page.update_attribute('cached',HTTParty.get(make_uri(ending)).body)
-    else
-      page = Page.find_or_create_by(:ending => ending)
-      page.update_attribute('cached', HTTParty.get(make_uri(ending)).body)
-    end
+    page = Page.find_or_create_by(ending: ending)
+    page.update_attribute('cached',HTTParty.get(make_uri(ending)).body) unless recently_cached?
     page.cached
+  end
+
+  def recently_cached?
+    page.cached && (Time.now - page.updated_at < 604800)
   end
 
   def replace_wikipedia_title(noko_obj)
