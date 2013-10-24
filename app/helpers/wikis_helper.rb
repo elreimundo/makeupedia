@@ -36,19 +36,19 @@ module WikisHelper
   end
 
   def parse_the_page(page)
-    Nokogiri::HTML()
+    Nokogiri::HTML(page)
   end
 
   def get_the_html(ending)
-    page = Page.find_by(ending)
-    if page && (DateTime.now - page.updated_at < 604800)
-      page.cached
-    elsif page
-      page.cached = HTTParty.get(make_uri(ending)).body
+    page = Page.find_by(ending: ending)
+    if page && page.cached && (Time.now - page.updated_at < 604800)
+    elsif page && page.cached
+      page.update_attribute('cached',HTTParty.get(make_uri(ending)).body)
     else
-      page = Page.create(:ending => ending)
-      page.cached = HTTParty.get(make_uri(ending)).body
+      page = Page.find_or_create_by(:ending => ending)
+      page.update_attribute('cached', HTTParty.get(make_uri(ending)).body)
     end
+    page.cached
   end
 
   def replace_wikipedia_title(noko_obj)
@@ -57,7 +57,7 @@ module WikisHelper
 
   def get_modified_wikipedia_body(ending, changes)
 
-    nokogiri_object = parse_the_page(make_uri(ending))
+    nokogiri_object = parse_the_page(get_the_html(ending))
     replace_wikipedia_title(nokogiri_object)
 
     changes.each do |change|
