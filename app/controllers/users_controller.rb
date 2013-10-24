@@ -21,6 +21,14 @@ class UsersController < ApplicationController
     end
   end
 
+  def edit
+    if current_user && current_user.id == params[:id].to_i
+      @user = current_user
+    else
+      redirect_to :root
+    end
+  end
+
   def update
     @user = current_user
     redirect_to root_path, :notice => 'Please sign in to see your profile.' and return unless params['id'].to_i == current_user.id
