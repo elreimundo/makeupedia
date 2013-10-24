@@ -1,17 +1,27 @@
+;
 (function(){
+
   $('#floating-selection-search-form').hide();
   $('.floating-selection-textarea').val('')
   $.ajax({
     url: '/wiki/reconstruct/' + findTheEnd() + findTheQueryString()
-  }).success(function(data){
-    $('#makeupedia-main-body').html(data.content);
-
+  }).done(function(data){
+    try{
+    //Run some code here
+      var content = data.content
+      $('#makeupedia-main-body').html(content);
+    }
+    catch(err){
+    //Handle errors here
+    }
     $('title').text($(data.title).text());
     if (findTheQueryString().length === 0) {
-      $("#content").on('mouseup touchend', function() {
+      $("#makeupedia-main-body").on('mouseup touchend', function() {
+      // $("#content").on('mouseup touchend', function() {
       $('#replace_text').val('');
        showForm();
       $('#find_text').val(getSelectedText());
+      $('#hide-form-button').on('vclick', function(e) {hideForm();})
       $('#killer-awesome-submit-button').on('vclick', function(e){
         e.preventDefault();
         makeReplacements();

@@ -24,9 +24,10 @@ function newPath(){
 
 var MakeRequest = {
   init: function() {
-    $('#main-form-submit').on('click', function(e){
-      e.preventDefault();
-      window.location = newPath()
+    $('.main-form').on('submit', function(e){
+      e.preventDefault() //jquery
+      e.stopPropagation() //jquery mobile
+      window.location = newPath() //go where we want
     })
   }
 }
