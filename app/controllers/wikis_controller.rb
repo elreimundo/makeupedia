@@ -24,7 +24,7 @@ class WikisController < ApplicationController
   end
 
   def reconstruct
-    ending = params[:ending]
+    ending = standardize(params[:ending])
     user_id = params[:user_id] || current_user.id if (params[:user_id] || current_user)
     changes = user_id ? User.find(user_id).changes_for_page(ending) : []
     render json: get_modified_wikipedia_body(ending, changes).to_json
