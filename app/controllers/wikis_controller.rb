@@ -15,7 +15,7 @@ class WikisController < ApplicationController
   end
 
   def revise
-    @ending = params[:page].capitalize
+    @ending = params[:ending].capitalize
     page = Page.find_or_create_by(:ending => standardize(@ending))
     if current_user
       page_user = PageUser.find_or_create_by(:user_id => current_user.id, :page_id => page.id)
@@ -24,16 +24,12 @@ class WikisController < ApplicationController
   end
 
   def reconstruct
-    page = params[:page]
+    ending = params[:ending]
     user_id = params[:user_id] || current_user.id if (params[:user_id] || current_user)
-    changes = user_id ? User.find(user_id).changes_for_page(page) : []
-    render json: get_modified_wikipedia_body(page, changes).to_json
+    changes = user_id ? User.find(user_id).changes_for_page(ending) : []
+    render json: get_modified_wikipedia_body(ending, changes).to_json
     # associate that page with the user that is passed in through params[:user_id]
     # if no params[:user_id], associate with current_user
     # if no params[:user_id] and no current_user, just pull in the wikipedia text
-  end
-
-  def director
-
   end
 end
