@@ -35,7 +35,11 @@
     margin-bottom: 1em;
 }
 
-#killer-awesome-submit-button {
+span.ui-btn-text{
+    display:none;
+}
+
+#killer-awesome-submit-button, #hide-form-button {
     -webkit-animation-delay: 0s;
     -webkit-animation-direction: normal;
     -webkit-animation-duration: 0s;
@@ -289,5 +293,8 @@
     writing-mode: lr-tb;
     z-index: auto;
     zoom: 1;
+}
+
+#center-the-buttons{
     display:block; margin:0 auto;
 }

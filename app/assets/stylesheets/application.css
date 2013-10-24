@@ -24,7 +24,7 @@ html, body {
   position: relative;
 }
 
-.main-form {
+.main-form, .login-form {
   padding-top:2em;
   padding-left:2em;
   padding-right:2em;
