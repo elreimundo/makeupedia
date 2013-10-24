@@ -25,10 +25,9 @@
 })()
 
 function makeReplacements(){
-  var findIt = new RegExp($('#find_text').val(),'gim')
-  var replaceIt = $('#replace_text').val()
-  newBody = $('#content').html().replace(findIt,replaceIt);
-  $('#content').html(newBody);
+  var findRegex = new RegExp($('#find_text').val(),'gim')
+  var replaceIt = $('#replace_text').val();
+  $('#content *').replaceText(findRegex, replaceIt);
 }
 
 function findTheEnd(){
