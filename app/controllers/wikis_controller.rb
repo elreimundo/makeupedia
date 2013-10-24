@@ -24,12 +24,16 @@ class WikisController < ApplicationController
       page_user = PageUser.where(:user_id => current_user.id).where(:page_id => page.id)
       page_user = (page_user.empty? ? PageUser.create(:user_id => current_user.id, :page_id => page.id) : page_user.first)
     end
-    render template: 'wikis/revise', layout: 'lazy_load'
+    if mobile_device?
+      render template: 'wikis/revise', layout: 'lazy_load_mobile'
+    else
+      render template: 'wikis/revise', layout: 'lazy_load'
+    end
   end
 
   def reconstruct
     page = params[:page]
-    user_id = params[:user_id] || current_user.id
+    user_id = params[:user_id] || current_user.id if params[:user_id] || current_user
     changes = user_id ? User.find(user_id).changes_for_page(page) : []
     render json: get_modified_wikipedia_body(page, changes).to_json
     # associate that page with the user that is passed in through params[:user_id]

@@ -129,3 +129,18 @@ a.permalink:hover{
   color:#3333FF;
   text-decoration: none;
 }
+
+.div-user {
+  width: 100%;
+  padding: 1em;
+}
+
+.makeupedia-title{
+  font-size:2em;
+  text-transform:uppercase;
+  font-family: Times;
+}
+
+.makeupedia-title-big{
+  font-size:1.2em;
+}

@@ -5,15 +5,16 @@
     url: '/wiki/reconstruct/' + findTheEnd() + findTheQueryString()
   }).success(function(data){
     $('#makeupedia-main-body').html(data.content);
+
     $('title').text($(data.title).text());
-    if (findTheQueryString().length === 0){
+    if (findTheQueryString().length === 0) {
       $("#content").on('mouseup touchend', function() {
        showForm();
       $('#find_text').val(getSelectedText());
       $('#killer-awesome-submit-button').on('click', function(e){
         e.preventDefault();
         makeReplacements();
-        hideForm()
+        hideForm();
         $.post('/wikis', $('#second-form').serialize())
         })
       });
