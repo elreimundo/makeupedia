@@ -1,6 +1,6 @@
 Mwiki::Application.routes.draw do
   root :to => "wikis#index"
-  resources :wikis
+  resources :wikis, only: [:index, :create]
   resources :users, only: [:new, :create, :show]
   resources :changes, only:[:destroy]
   resources :page_users, only: [:destroy]
