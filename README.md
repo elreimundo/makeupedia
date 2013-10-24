@@ -43,4 +43,4 @@ $ rspec
 $ rake jasmine
 ```
 
-Then visit your localhost, normally localhost:3000, to view the tests.
+Then visit your localhost:8888 to view the tests.
