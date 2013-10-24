@@ -5,15 +5,14 @@ gem 'httparty'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
-group :test, :development do
-	gem 'sqlite3'
-end
 
 group :production do
 	gem 'pg'
 end
 
 group :development, :test do
+  gem 'sqlite3'
+  gem 'quiet_assets'
   gem 'jasmine'
   gem 'faker'
   gem 'capybara'

@@ -20,7 +20,11 @@ class WikisController < ApplicationController
     if current_user
       page_user = PageUser.find_or_create_by(:user_id => current_user.id, :page_id => page.id)
     end
-    render template: 'wikis/revise', layout: 'lazy_load'
+    if mobile_device?
+      render template: 'wikis/revise', layout: 'lazy_load_mobile'
+    else
+      render template: 'wikis/revise', layout: 'lazy_load'
+    end
   end
 
   def reconstruct
