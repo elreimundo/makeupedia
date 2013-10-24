@@ -8,4 +8,14 @@ class Page < ActiveRecord::Base
   def url
     "http://en.wikipedia.org/wiki/" + self.ending.split(' ').join('_')
   end
+
+  def self.find_by(query)
+    page = where(query)
+    page.empty? ? nil : page.first
+  end
+
+  def self.find_or_create_by(query)
+    page = where(query)
+    page.empty? ? create(query) : page.first
+  end
 end

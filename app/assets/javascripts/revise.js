@@ -10,7 +10,7 @@
       $("#content").on('mouseup touchend', function() {
        showForm();
       $('#find_text').val(getSelectedText());
-      $('#killer-awesome-submit-button').on('click', function(e){
+      $('#killer-awesome-submit-button').on('vclick', function(e){
         e.preventDefault();
         makeReplacements();
         hideForm()
@@ -31,7 +31,7 @@ function makeReplacements(){
 }
 
 function findTheEnd(){
-  return window.location.pathname.split('/').pop()
+  return capitalize(window.location.pathname.split('/').pop())
 }
 
 function findTheQueryString(){
@@ -56,4 +56,6 @@ function getSelectedText() {
   return text;
 }
 
-
+function capitalize(string){
+  return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+}

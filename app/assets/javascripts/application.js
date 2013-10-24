@@ -18,12 +18,15 @@ var MakeRequest = {
   init: function() {
     $('#main-form-submit').on('click', function(e){
       e.preventDefault();
-      window.location = '/wiki/'+$('#search').val().split(' ').join('_');
+      window.location = '/wiki/'+capitalize($('#search').val().split(' ').join('_'));
     })
   }
+}
+
+function capitalize(string){
+  return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
 }
 
 $(function() {
   MakeRequest.init();
 });
-

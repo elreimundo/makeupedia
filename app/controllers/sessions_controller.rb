@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id
       redirect_to root_path
     else
-      redirect_to root_path
+      redirect_to root_path, :notice => "Makeupedia could not log you in at this time."
     end
   end
 

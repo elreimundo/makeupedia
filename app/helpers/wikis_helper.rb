@@ -31,6 +31,10 @@ module WikisHelper
     url = ending.empty? ? "#{base_uri}/Internet" : "#{base_uri}/#{page_name}"
   end
 
+  def standardize(ending)
+    ending.split('_').join(' ').capitalize
+  end
+
   def parse_the_page(page)
     Nokogiri::HTML(HTTParty.get(page).body)
   end
