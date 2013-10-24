@@ -8,4 +8,9 @@ class PageUser < ActiveRecord::Base
   def permalink
     "http://makeupedia.herokuapp.com/wiki/" + page.ending.split(' ').join('_') + "?user_id=" + user_id.to_s
   end
+
+  def self.find_or_create_by(hash)
+    page_user = PageUser.where(:user_id => hash[:user_id]).where(:page_id => hash[:page_id])
+    page_user.empty? ? PageUser.create(:user_id => hash[:user_id], :page_id => hash[:page_id]) : page_user.first
+  end
 end
