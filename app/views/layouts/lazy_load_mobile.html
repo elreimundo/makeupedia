@@ -26,6 +26,8 @@
 mw.loader.load(["ext.centralNotice.bannerController.mobiledevice","ext.centralNotice.bannerController.mobile","mediawiki.page.startup","mobile.head","mobile.site"]);
 }</script><script src="//bits.wikimedia.org/en.wikipedia.org/load.php?debug=false&amp;lang=en&amp;modules=ext.centralNotice.bannerController.mobile%2Cmobiledevice%7Cjquery.client%2Ccookie%2CmwExtension%7Cmediawiki.notify%2Cutil%7Cmediawiki.page.startup%7Cmobile.head&amp;skin=vector&amp;version=20131022T024636Z&amp;*"></script><script src="//bits.wikimedia.org/en.wikipedia.org/load.php?debug=false&amp;lang=en&amp;modules=mobile.site&amp;skin=vector&amp;version=20131023T161123Z&amp;*"></script>
 
+    <%= javascript_include_tag "application" %>
+    <%= stylesheet_link_tag "lazy_load" %>
 </head>
 <body>
   <%= yield %>
