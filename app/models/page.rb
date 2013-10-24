@@ -9,6 +9,10 @@ class Page < ActiveRecord::Base
     "http://en.wikipedia.org/wiki/" + self.ending.split(' ').join('_')
   end
 
+  def recently_cached?
+    cached && Time.now - 1.week < updated_at
+  end
+
   def self.find_by(query)
     page = where(query)
     page.empty? ? nil : page.first
