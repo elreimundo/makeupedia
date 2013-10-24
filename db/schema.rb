@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131023185346) do
+ActiveRecord::Schema.define(:version => 20131024162408) do
 
   create_table "changes", :force => true do |t|
     t.text     "find_text"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(:version => 20131023185346) do
     t.text     "ending"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.text     "cached"
   end
 
   create_table "users", :force => true do |t|
