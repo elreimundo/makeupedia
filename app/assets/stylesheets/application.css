@@ -40,6 +40,11 @@ html, body {
   border-radius:5px;
 }
 
+.div-user {
+  width: 100%;
+  padding: 1em;
+}
+
 .submit-button {
   margin-top:0.75em;
 }
@@ -123,12 +128,6 @@ a.permalink:visited{
 a.permalink:hover{
   color:#3333FF;
   text-decoration: none;
-}
-
-.div-user {
-  width: 100%;
-  padding: 1em;
-  overflow: hidden;
 }
 
 .makeupedia-title{
