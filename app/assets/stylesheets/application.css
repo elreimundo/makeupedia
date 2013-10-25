@@ -24,7 +24,7 @@ html, body {
   position: relative;
 }
 
-.main-form, .login-form {
+.main-form, .login-form, .user-form {
   padding-top:2em;
   padding-left:2em;
   padding-right:2em;
@@ -38,6 +38,11 @@ html, body {
 .div-transparent {
   background-color:rgba(155,155,155,0.4);
   border-radius:5px;
+}
+
+.div-user {
+  width: 100%;
+  padding: 1em;
 }
 
 .submit-button {
@@ -109,8 +114,12 @@ a.delete {
   margin:15px;
 }
 
+.center {
+  text-align:center;
+}
+
 a.permalink{
-  font-size:10px;
+  font-size:0.8em;
   color:blue;
   text-decoration: none;
 }
@@ -123,11 +132,6 @@ a.permalink:visited{
 a.permalink:hover{
   color:#3333FF;
   text-decoration: none;
-}
-
-.div-user {
-  width: 100%;
-  padding: 1em;
 }
 
 .makeupedia-title{

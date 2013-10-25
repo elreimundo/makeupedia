@@ -4,4 +4,8 @@ class ChangesController < ApplicationController
     @change.destroy
     redirect_to root_path
   end
+
+  def delete_many
+
+  end
 end

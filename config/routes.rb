@@ -14,4 +14,5 @@ Mwiki::Application.routes.draw do
 
   get "/wiki/reconstruct/:ending", to: 'wikis#reconstruct'
   get "/wiki/:ending", to: 'wikis#revise'
+  post "/changes/delete_many", to: 'changes#delete_many', as: 'delete_many'
 end
