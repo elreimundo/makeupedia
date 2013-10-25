@@ -6,7 +6,7 @@ class Page < ActiveRecord::Base
   validates :ending, presence: true, uniqueness: true
 
   def url
-    "http://en.wikipedia.org/wiki/" + self.ending.split(' ').join('_')
+    "http://en.wikipedia.org/wiki/" + ending.split(' ').join('_')
   end
 
   def recently_cached?
