@@ -11,17 +11,17 @@ describe "the signin process", :type => :feature do
 
   it "signs me in" do
     visit '/sessions/new'
-    within(".main-form") do
+    within(".login-form") do
       fill_in 'Email', :with => 'user@example.com'
       fill_in 'Password', :with => 'caplin'
     end
     click_button 'Log In'
-    expect(page).to have_content 'user@example.com'
+    expect(page).to have_content 'Logout'
   end
 
   it "allows signed-in user to save page" do
     visit '/sessions/new'
-    within(".main-form") do
+    within(".login-form") do
       fill_in 'Email', :with => 'user@example.com'
       fill_in 'Password', :with => 'caplin'
     end
@@ -33,7 +33,7 @@ describe "the signin process", :type => :feature do
 
   it "allows signed-in user to save change" do
     visit '/sessions/new'
-    within(".main-form") do
+    within(".login-form") do
       fill_in 'Email', :with => 'user@example.com'
       fill_in 'Password', :with => 'caplin'
     end
