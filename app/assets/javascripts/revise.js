@@ -1,43 +1,41 @@
 ;
 (function(){
-
-  $('#floating-selection-search-form').hide();
-  $('.floating-selection-textarea').val('')
+  hideAndClearTheForm();
   $.ajax({
     url: '/wiki/reconstruct/' + findTheEnd() + findTheQueryString()
-  }).done(function(data){
-    try{
-    //Run some code here
-      var content = data.content
-      $('#makeupedia-main-body').html(content);
-    }
-    catch(err){
-    //Handle errors here
-    }
-    $('title').text($(data.title).text());
-    if (findTheQueryString().length === 0) {
-      $("#makeupedia-main-body").on('mouseup touchend', function() {
-      // $("#content").on('mouseup touchend', function() {
-      $('#replace_text').val('');
-       showForm();
-      $('#find_text').val(getSelectedText());
-      $('#hide-form-button').on('vclick', function(e) {
-        e.stopPropagation();
-        hideForm();
-      })
-      $('#killer-awesome-submit-button').on('vclick', function(e){
-        e.preventDefault();
-        makeReplacements();
-        hideForm();
-        $.post('/wikis', $('#second-form').serialize())
-        })
-      });
-    }
-  }).fail(function(){
-    $('body').prepend('<div>Something went wrong. The page you are looking for is probably too big for us to handle. Sorry!</div>')
-  })
-
+  }).done(reconstructThePage).fail(weFail)
 })()
+
+function reconstructThePage(data){
+  try{
+    var content = data.content
+    $('#makeupedia-main-body').html(content);
+  }
+  catch(err){
+  }
+  changeToOurTitle($(data.title).text());
+  if (findTheQueryString().length === 0) {
+    attachFormListeners();
+  }
+}
+
+function showFormWithReplaceCleared(){
+  $('#replace_text').val('');
+  showForm();
+}
+
+function changeToOurTitle(title){
+  $('title').text(title);
+}
+
+function weFail(){
+  $('body').prepend('Sorry. Something went wrong.')
+}
+
+function hideAndClearTheForm(){
+  $('#floating-selection-search-form').hide();
+  $('.floating-selection-textarea').val('')
+}
 
 function makeReplacements(){
   var findRegex = new RegExp($('#find_text').val(),'gim')
@@ -73,4 +71,21 @@ function getSelectedText() {
 
 function capitalize(string){
   return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+}
+
+function attachFormListeners(){
+  $("#makeupedia-main-body").on('mouseup touchend', function() {
+    showFormWithReplaceCleared()
+    $('#find_text').val(getSelectedText());
+    $('#hide-form-button').on('vclick', function(e) {
+      e.stopPropagation();
+      hideForm();
+    })
+    $('#killer-awesome-submit-button').on('vclick', function(e){
+      e.preventDefault();
+      makeReplacements();
+      hideForm();
+      $.post('/wikis', $('#second-form').serialize())
+    })
+  });
 }
