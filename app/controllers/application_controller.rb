@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user
   helper_method :mobile_device?
+  helper_method :users_show
 
   private
   def current_user

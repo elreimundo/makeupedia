@@ -4,13 +4,12 @@
   border-bottom-right-radius:5px;
   width:80%;
   height:50%;
-  min-height:7em;
+  min-height:10em;
   max-height:15em;
   position:fixed;
   left:50%;
   top: 0px;
   margin-left:-40%;
-  overflow: hidden;
   z-index: 1000;
 }
 

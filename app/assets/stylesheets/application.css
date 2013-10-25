@@ -24,7 +24,7 @@ html, body {
   position: relative;
 }
 
-.main-form, .login-form {
+.main-form, .login-form, .user-form {
   padding-top:2em;
   padding-left:2em;
   padding-right:2em;
@@ -128,6 +128,7 @@ a.permalink:hover{
 .div-user {
   width: 100%;
   padding: 1em;
+  overflow: hidden;
 }
 
 .makeupedia-title{

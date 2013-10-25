@@ -2,7 +2,7 @@
   <div class="error_messages">
     <%= @user.errors.full_messages.join(', ') %>
   </div>
-  <%= form_for @user, :html => {:class => "main-form", "data-ajax" => "false"} do |t| %>
+  <%= form_for @user, :html => {:class => "user-form", "data-ajax" => "false"} do |t| %>
   <div id="email">
     <%= t.text_field :email, :class => "form-control top-margin", placeholder: "Email" %>
   </div>
