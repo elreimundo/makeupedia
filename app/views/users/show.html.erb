@@ -9,7 +9,8 @@
             <% next if page_user.changes.empty? %>
             <div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="c">
               <h3><%= "Page: #{page.ending}" %></h3>
-              <p>Permalink: <%= page_user.permalink %></p>
+              <strong>Permalink:</strong><br>
+                <a href="<%= page_user.permalink %>" class="permalink"><%= page_user.permalink %></a>
               <form>
                 <fieldset data-role="controlgroup">
                   <% page_user.changes.each do |change, index| %>
@@ -18,9 +19,9 @@
 
                   <% end %> <!-- do page -->
                 </fieldset>
-                <div data-role="controlgroup" data-type="horizontal">
+                <div data-role="controlgroup" data-type="horizontal" class="center">
                   <a href="/wiki/<%=@page.ending.split(' ').join('_')%>" data-role="button" data-icon="check" data-mini="true", data-ajax="false">Apply selected</a>
-                  <%= link_to "Delete selected", delete_many_path, 'method' => 'post', 'data-role' => 'button', 'data-mini' => 'true', 'data-ajax' => 'false', 'data-icon' => 'delete' %>
+                  <!--<%= link_to "Delete selected", delete_many_path, 'method' => 'post', 'data-role' => 'button', 'data-mini' => 'true', 'data-ajax' => 'false', 'data-icon' => 'delete' %>-->
                   <%= link_to "Delete page", page_user_path(page_user), :method => "delete", :confirm => 'Are you sure you want to delete this page?', 'data-ajax' => 'false', 'data-icon' => 'delete', 'data-role' => 'button', 'data-mini' => 'true' %>
                 </div>
               </form>
