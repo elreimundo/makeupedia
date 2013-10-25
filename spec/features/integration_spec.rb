@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe "the signin process", :type => :feature do
+  before :all do
+    DatabaseCleaner.clean
+  end
+
   before :each do
     User.create(:email => 'user@example.com', :password => 'caplin')
   end
@@ -22,14 +26,8 @@ describe "the signin process", :type => :feature do
       fill_in 'Password', :with => 'caplin'
     end
     click_button 'Log In'
-    visit '/'
-    within(".main-form") do
-      fill_in 'ending', :with => 'Internet'
-      fill_in 'search', :with => 'the'
-      fill_in 'replace', :with => 'stuff'
-    end
     expect {
-      click_button 'Submit'
+      visit '/wiki/Internet'
     }.to change { Page.count }.by 1
   end
 
@@ -40,11 +38,10 @@ describe "the signin process", :type => :feature do
       fill_in 'Password', :with => 'caplin'
     end
     click_button 'Log In'
-    visit '/'
-    within(".main-form") do
-      fill_in 'ending', :with => 'Internet'
-      fill_in 'search', :with => 'the'
-      fill_in 'replace', :with => 'stuff'
+    visit '/wiki/Internet'
+    within(".second-form") do
+      fill_in 'search', :with => 'Internet'
+      fill_in 'replace', :with => 'Al Gore'
     end
     expect {
       click_button 'Submit'

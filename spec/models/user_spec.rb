@@ -2,21 +2,19 @@ require 'spec_helper'
 
 describe User do
   before :all do
-    User.destroy_all
-    Page.destroy_all
-    PageUser.destroy_all
-    password = Faker::Lorem.words(1)
+    DatabaseCleaner.clean
+    password = Faker::Lorem.word
     @user = User.create(:email => Faker::Internet.email, :password => password, :password_confirmation => password)
   end
 
   it "should validate uniqueness of email" do
-    password = Faker::Lorem.words(1)
+    password = Faker::Lorem.word
     new_user = User.create(:email => @user.email, :password => password, :password_confirmation => password)
     expect(new_user).not_to be_persisted
   end
 
   it "should validate presence of email" do
-    password = Faker::Lorem.words(1)
+    password = Faker::Lorem.word
     new_user = User.create(:password => password, :password_confirmation => password)
     expect(new_user).not_to be_persisted
   end
