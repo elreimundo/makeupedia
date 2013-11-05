@@ -47,14 +47,14 @@
   width:50%;
   position:absolute;
   left:0;
-  float-left;
+  float:left;
 }
 
 #div-right {
   width:50%;
   position:absolute;
   right:0;
-  float-right;
+  float:right;
 }
 
 #killer-awesome-submit-button, #hide-form-button {
