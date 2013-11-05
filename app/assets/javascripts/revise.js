@@ -18,19 +18,21 @@
     if (findTheQueryString().length === 0) {
       $("#makeupedia-main-body").on('mouseup touchend', function() {
       // $("#content").on('mouseup touchend', function() {
-      $('#replace_text').val('');
-       showForm();
-      $('#find_text').val(getSelectedText());
-      $('#hide-form-button').on('vclick', function(e) {
-        e.stopPropagation();
-        hideForm();
-      })
-      $('#killer-awesome-submit-button').on('vclick', function(e){
-        e.preventDefault();
-        makeReplacements();
-        hideForm();
-        $.post('/wikis', $('#second-form').serialize())
-        })
+        if (window.getSelection().toString().length > 0){
+          $('#replace_text').val('');
+          showForm();
+          $('#find_text').val(getSelectedText());
+          $('#hide-form-button').on('vclick', function(e) {
+            e.stopPropagation();
+            hideForm();
+          })
+          $('#killer-awesome-submit-button').on('vclick', function(e){
+            e.preventDefault();
+            makeReplacements();
+            hideForm();
+            $.post('/wikis', $('#second-form').serialize())
+          })
+        }
       });
     }
   }).fail(function(){
